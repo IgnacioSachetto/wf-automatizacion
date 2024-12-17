@@ -1,0 +1,79 @@
+/* Contenedor del sidebar */
+.sidebar-container {
+  position: fixed;
+  top: 12%;
+  left: 0;
+  height: 100%;
+  width: 80px; /* Ancho inicial */
+  background-color: #360765; /* Fondo con color vibrante */
+  transition: width 0.2s linear; /* Transición suave para expandir */
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+  border-top-right-radius: 20px; /* Esquinas redondeadas */
+  padding-top: 20px;
+}
+
+/* Sidebar - estilo base */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 100%;
+  padding-top: 0px;
+}
+
+/* Elementos del sidebar */
+.sidebar-item {
+  position: relative; /* Necesario para el posicionamiento de los logos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0; /* Separación entre los botones */
+  padding: 10px;
+  border-radius: 10px; /* Bordes redondeados para los botones */
+  cursor: pointer;
+  background-color: #360765; /* Fondo igual al del sidebar */
+}
+
+/* Efecto al pasar el mouse sobre los botones */
+.sidebar-item:hover  {
+  background-color: #fffcfa; /* Color ligeramente más claro al hacer hover */
+  color: #360765;
+}
+
+
+/* Logos de los botones */
+.sidebar-logo {
+  width: 40px; /* Ajusta el tamaño del logo según sea necesario */
+  height: 40px;
+}
+
+/* Texto que aparece cuando se pasa el mouse */
+.sidebar-text {
+  display: none; /* Inicialmente oculto */
+  color: white;
+  margin-left: 15px; /* Espacio entre el logo y el texto */
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  opacity: 0;
+}
+
+/* Mostrar el texto al pasar el mouse sobre el sidebar completo */
+.sidebar-container:hover .sidebar-text {
+  display: inline; /* Mostrar texto */
+  opacity: 1; /* Asegurarse de que el texto sea visible */
+  color: #360765;
+
+}
+
+/* Mostrar los botones adicionales cuando el sidebar está expandido */
+.sidebar-container:hover {
+  width: 200px; /* Ancho expandido */
+}
+
+.sidebar-item.disabled {
+  opacity: 0.6;
+}

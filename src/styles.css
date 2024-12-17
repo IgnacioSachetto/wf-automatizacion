@@ -1,0 +1,29 @@
+/* Importa los estilos de ngx-toastr directamente */
+@import 'node_modules/ngx-toastr/toastr.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  justify-content: flex-start; /* Alineación en el eje vertical */
+}
+
+
+.main-content {
+  display: flex;
+  flex-direction: column; /* Organiza los elementos en una columna */
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center; /* Centra el contenido horizontalmente */
+  margin-top: 64px; /* Desplaza el contenido debajo del navbar */
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box; /* Para asegurar que el padding no afecte el tamaño */
+}
