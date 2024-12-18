@@ -4,7 +4,7 @@
     <div class="form-group">
       <label for="nombre">Nombre del Producto</label>
       <div class="input-container">
-        <input type="text" id="nombre" required>
+        <input type="text" id="nombre" required [(ngModel)]="nombreProducto" name="nombreProducto">
         <button type="button" class="info-btn">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Nombre del producto o iniciativa.</span>
@@ -73,7 +73,8 @@
     <div class="form-group">
       <label for="text-area">Descripción del Producto (Objetivo, Solución, Contexto, etc)</label>
       <div class="input-container">
-        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..."></textarea>
+        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="descripcionProducto" name="descripcionProducto"></textarea>
+
         <button type="button" class="info-btn">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Proporciona una descripción completa del producto.</span>

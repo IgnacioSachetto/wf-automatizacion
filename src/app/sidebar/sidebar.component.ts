@@ -10,21 +10,7 @@ export class SidebarComponent {
 
   constructor(private jiraService: JiraService) {}
 
-  // Método para crear una tarea en Jira
-  crearTareaEnJira() {
 
-
-    this.jiraService.crearTareaEnJira().subscribe(
-      (response) => {
-        console.log('Tarea creada correctamente:', response);
-        // Aquí puedes agregar lógica adicional para manejar la respuesta, como mostrar un mensaje de éxito.
-      },
-      (error) => {
-        console.error('Error al crear tarea en Jira:', error);
-        // Puedes agregar lógica aquí para manejar errores, como mostrar un mensaje de error.
-      }
-    );
-  }
 
   @Output() formSelected = new EventEmitter<string>();
 

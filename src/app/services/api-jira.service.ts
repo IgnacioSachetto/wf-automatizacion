@@ -12,7 +12,7 @@ export class JiraService {
   constructor(private http: HttpClient) {}
 
   // Método para crear una tarea en Jira
-  crearTareaEnJira( ): Observable<any> {
+  crearTareaEnJira(nombre: string, descripcion: string): Observable<any> {
     const payload = {
       "fields": {
         "issuetype": {
@@ -21,8 +21,8 @@ export class JiraService {
         "project": {
           "id": '10017'  // ID de tu proyecto
         },
-        "summary": "nACHO",  // El título de la tarea
-        "description": "nacho descri",  // Descripción de la tarea
+        "summary": nombre,  // El título de la tarea
+        "description": descripcion,  // Descripción de la tarea
       }
     };
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; // Importa el servicio Router
+import { JiraService } from './services/api-jira.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,15 @@ export class AppComponent {
   currentScreen: string = '';  // Para controlar la pantalla que se muestra
   selectedForm: string = '';   // Para controlar qué formulario se muestra
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private jiraService: JiraService) {}
 
   // Método para manejar el envío del formulario
   onFormSubmitted() {
     this.selectedForm = 'pantalla-intermedia-producto'; // Establece el formulario como "pantalla-intermedia-producto"
     this.currentScreen = 'pantalla-intermedia-producto'; // Configura la pantalla actual
+
+
+
 }
 
 onFormSubmitted2() {
