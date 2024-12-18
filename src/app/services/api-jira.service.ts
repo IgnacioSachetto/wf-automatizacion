@@ -16,7 +16,7 @@ export class JiraService {
     const payload = {
       "fields": {
         "issuetype": {
-          "id": '10038'  // ID del tipo de tarea (por ejemplo, Epic o Task)
+          "id": '10039'  // ID del tipo de tarea (por ejemplo, Epic o Task)
         },
         "project": {
           "id": '10017'  // ID de tu proyecto
