@@ -2,83 +2,95 @@
   <h2>Carga de Riesgos - Solo Referentes</h2>
   <form (ngSubmit)="enviarFormulario($event)"> <!-- Vincula el evento de envío con el método enviarFormulario -->
     <!-- Área que levanta el riesgo -->
-      <div class="form-group">
-          <label for="area-form">Área que levanta el riesgo:</label>
-          <div class="select-container">
-              <select id="area" class="form-control">
-                  <option value="area-select">Riesgo IT & OP</option>
-                  <option value="area-select">Prevención de Fraudes</option>
-                  <option value="area-select">Legales & Compliance</option>
-                  <option value="area-select">Contabilidad</option>
-                  <option value="area-select">Planning</option>
-                  <option value="area-select">Impuestos</option>
-                  <option value="area-select">Ciberseguridad</option>
-                  <option value="area-select">Data</option>
-                  <option value="area-select">Operaciones</option>
-                  <option value="area-select">Experiencia</option>
-                  <option value="area-select">ALM & Finanzas Corporativa</option>
-                  <option value="area-select">PLAFT</option>
-                  <option value="area-select">Marketing</option>
-              </select>
-              <button type="button" class="info-btn">
-                  <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-                  <span class="custom-tooltip">Selecciona el área que levanta el riesgo.</span>
-              </button>
-          </div>
+    <div class="form-group">
+      <label for="area-form">Área que levanta el riesgo:</label>
+      <div class="select-container">
+        <select id="area" class="form-control">
+          <option value="area-select">Riesgo IT & OP</option>
+          <option value="area-select">Prevención de Fraudes</option>
+          <option value="area-select">Legales & Compliance</option>
+          <option value="area-select">Contabilidad</option>
+          <option value="area-select">Planning</option>
+          <option value="area-select">Impuestos</option>
+          <option value="area-select">Ciberseguridad</option>
+          <option value="area-select">Data</option>
+          <option value="area-select">Operaciones</option>
+          <option value="area-select">Experiencia</option>
+          <option value="area-select">ALM & Finanzas Corporativa</option>
+          <option value="area-select">PLAFT</option>
+          <option value="area-select">Marketing</option>
+        </select>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona el área que levanta el riesgo.</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Nombre -->
-      <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <div class="input-container">
-              <input type="text" id="nombre" value="Manuel Perez" required readonly>
-              <button type="button" class="info-btn">
-                  <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-                  <span class="custom-tooltip">Persona Responsable de levantar el Riesgo</span>
-              </button>
-          </div>
+    <!-- Título del Riesgo (Nuevo campo) -->
+    <div class="form-group">
+      <label for="tituloRiesgo">Título del Riesgo</label>
+      <div class="input-container">
+        <input type="text" id="tituloRiesgo" [(ngModel)]="tituloRiesgo" name="tituloRiesgo" required>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Proporciona un título breve para el riesgo.</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Focal Point -->
-      <div class="form-group">
-          <label for="focal-point">Focal Point</label>
-          <div class="input-container">
-              <input type="text" id="focal-point" value="Jose Rodriguez (Aut)" required readonly>
-              <button type="button" class="info-btn">
-                  <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-                  <span class="custom-tooltip">Focal point que se encuentra relacionado con el riesgo.</span>
-              </button>
-          </div>
+    <!-- Nombre -->
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <div class="input-container">
+        <input type="text" id="nombreRiesgo" value="Manuel Perez" readonly>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Persona Responsable de levantar el Riesgo</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Tipo -->
-      <div class="form-group">
-          <label for="tipo">Tipo</label>
-          <div class="select-container">
-              <select id="tipo" class="form-control">
-                  <option value="" disabled selected>Seleccionar una</option>
-                  <option value="riesgo">Riesgo</option>
-                  <option value="recomendacion">Recomendación</option>
-              </select>
-              <button type="button" class="info-btn">
-                  <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-                  <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
-              </button>
-          </div>
+    <!-- Focal Point -->
+    <div class="form-group">
+      <label for="focal-point">Focal Point</label>
+      <div class="input-container">
+        <input type="text" id="focal-point" value="Jose Rodriguez (Aut)" required readonly>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Focal point que se encuentra relacionado con el riesgo.</span>
+        </button>
       </div>
+    </div>
 
-      <!-- Descripción del Riesgo -->
-      <div class="form-group">
-          <label for="riesgo">Descripción del Riesgo</label>
-          <div class="input-container">
-              <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..."></textarea>
-              <button type="button" class="info-btn">
-                  <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-                  <span class="custom-tooltip">Describe el riesgo o proporciona enlaces relevantes.</span>
-              </button>
-          </div>
+    <!-- Tipo -->
+    <div class="form-group">
+      <label for="tipo">Tipo</label>
+      <div class="select-container">
+        <select id="tipo" class="form-control">
+          <option value="" disabled selected>Seleccionar una</option>
+          <option value="riesgo">Riesgo</option>
+          <option value="recomendacion">Recomendación</option>
+        </select>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
+        </button>
       </div>
+    </div>
 
-      <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
+    <!-- Descripción del Riesgo -->
+    <div class="form-group">
+      <label for="riesgo">Descripción del Riesgo</label>
+      <div class="input-container">
+        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="descripcionRiesgo" name="descripcionRiesgo"></textarea>
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Describe el riesgo o proporciona enlaces relevantes.</span>
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
   </form>
 </div>

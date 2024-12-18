@@ -34,7 +34,7 @@ export class FormularioIniciativaComponent {
 
     // Llamar al servicio para crear una tarea en Jira
     setTimeout(() => {
-      this.jiraService.crearTareaEnJira(this.nombreProducto, this.descripcionProducto).subscribe(
+      this.jiraService.crearIssueEnJira(this.nombreProducto, this.descripcionProducto, '10039').subscribe(
         (response) => {
           console.log('Tarea creada correctamente:', response);
           this.toastr.success('Tarea creada en Jira', '¡Éxito!');

@@ -7,30 +7,24 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class JiraService {
-  private jiraApiUrl = 'http://localhost:3000/jira-api';  // URL completa incluyendo el puerto 3000
+  private jiraApiUrl = 'http://localhost:3000/jira-api'; // URL del backend
 
   constructor(private http: HttpClient) {}
 
-  // Método para crear una tarea en Jira
-  crearTareaEnJira(nombre: string, descripcion: string): Observable<any> {
+  // Método genérico para crear issues en Jira
+  crearIssueEnJira(nombre: string, descripcion: string, issueTypeId: string): Observable<any> {
+    // Ajustar el payload para coincidir con lo que el backend espera
     const payload = {
-      "fields": {
-        "issuetype": {
-          "id": '10039'  // ID del tipo de tarea (por ejemplo, Epic o Task)
-        },
-        "project": {
-          "id": '10017'  // ID de tu proyecto
-        },
-        "summary": nombre,  // El título de la tarea
-        "description": descripcion,  // Descripción de la tarea
-      }
+      summary: nombre, // Título del issue
+      description: descripcion, // Descripción del issue
+      issueTypeId: issueTypeId, // ID dinámico del tipo de issue
     };
 
-    // Enviar la solicitud al backend que está en /jira-api
+    // Enviar la solicitud al backend
     return this.http.post(this.jiraApiUrl, payload).pipe(
       catchError((error) => {
-        console.error('Error al crear tarea en Jira:', error);
-        throw error;  // Re-lanzar el error
+        console.error('Error al crear issue en Jira:', error);
+        throw error; // Re-lanzar el error
       })
     );
   }
