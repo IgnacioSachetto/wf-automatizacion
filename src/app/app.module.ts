@@ -1,17 +1,18 @@
+import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- Asegúrate de que FormsModule esté importado
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
+import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
+import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
+import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/formulario-nueva-iniciativa.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
-import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
-import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,14 @@ import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciat
     PantallaIntermediaIaComponent,
     FormularioCargaRiesgoComponent,
     FormularioCargaRiesgoIaComponent,
-    FormularioNuevaIniciativaIaComponent
+    FormularioNuevaIniciativaIaComponent,
+
+
 
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,  // Necesario para Toastr
     ToastrModule.forRoot({
