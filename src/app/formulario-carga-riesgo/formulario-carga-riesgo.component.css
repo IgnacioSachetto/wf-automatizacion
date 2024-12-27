@@ -165,3 +165,40 @@ button[type="submit"], .agregar-riesgos {
 .table td:nth-child(2) { /* Asegúrate de que sea la posición correcta de la columna */
   max-width: 200px; /* Ancho máximo para la descripción */
 }
+
+/* Botones de acción */
+button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+button:active {
+  background-color: #ddd;
+}
+
+/* Estilos para inputs y textareas */
+input[type="text"], textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.input-sin-borde {
+  border: none;
+  outline: none;
+  box-shadow: none; /* Elimina el borde por enfoque también */
+}
