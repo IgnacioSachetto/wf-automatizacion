@@ -1,90 +1,101 @@
 <div class="form-container">
   <h2>Formulario de Solicitud - Nuevas Iniciativas</h2>
-  <form (ngSubmit)="enviarFormulario($event)"> <!-- Vincula el evento de envío con el método enviarFormulario -->
+  <form (ngSubmit)="enviarFormulario($event)">
+    <!-- Primer Campo -->
     <div class="form-group">
-      <label for="nombre">Nombre del Producto</label>
+      <label for="nombre">Nombre del Producto
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
+        </div>
+      </label>
       <div class="input-container">
         <input type="text" id="nombre" required [(ngModel)]="nombreProducto" name="nombreProducto">
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Nombre del producto o iniciativa.</span>
-        </button>
       </div>
     </div>
 
+    <!-- Segundo Campo -->
     <div class="form-group">
-      <label for="email">Referente del Producto</label>
-      <div class="input-container">
-        <input type="email" id="email" placeholder="Correo eléctronico Referente" required>
-        <button type="button" class="info-btn">
+      <label for="email">Referente del Producto
+        <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Correo electrónico del referente del producto.</span>
-        </button>
+        </div>
+      </label>
+      <div class="input-container">
+        <input type="email" id="email" placeholder="Correo electrónico Referente" required>
       </div>
     </div>
 
+    <!-- Tercer Campo -->
     <div class="form-group">
-      <label for="email">Referente de UX</label>
-      <div class="input-container">
-        <input type="email" id="email" placeholder="Correo eléctronico Referente">
-        <button type="button" class="info-btn">
+      <label for="referenteUX">Referente de UX
+        <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Correo electrónico del referente de UX.</span>
-        </button>
+        </div>
+      </label>
+      <div class="input-container">
+        <input type="email" id="referenteUX" placeholder="Correo electrónico Referente UX">
       </div>
     </div>
 
+    <!-- Cuarto Campo -->
     <div class="form-group">
-      <label for="email">Referente de IT</label>
-      <div class="input-container">
-        <input type="email" id="email" placeholder="Correo eléctronico Referente">
-        <button type="button" class="info-btn">
+      <label for="referenteIT">Referente de IT
+        <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Correo electrónico del referente de IT.</span>
-        </button>
+        </div>
+      </label>
+      <div class="input-container">
+        <input type="email" id="referenteIT" placeholder="Correo electrónico Referente IT">
       </div>
     </div>
 
+    <!-- Quinto Campo -->
     <div class="form-group">
-      <label for="compañia">Compañía</label>
+      <label for="compañia">Compañía
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona la compañía correspondiente.</span>
+        </div>
+      </label>
       <div class="select-container">
         <select id="compañia" class="form-control">
           <option value="tn">TN</option>
           <option value="nd">ND</option>
         </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Selecciona la compañía correspondiente.</span>
-        </button>
       </div>
     </div>
 
+    <!-- Sexto Campo -->
     <div class="form-group">
-      <label for="fecha">Fecha Estimada de Implementación</label>
-      <div class="input-container">
-        <input type="date" id="fecha" class="form-control">
-        <button type="button" class="info-btn">
+      <label for="fecha">Fecha Estimada de Implementación
+        <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Fecha estimada de implementación del producto.</span>
-        </button>
+        </div>
+      </label>
+      <div class="input-container">
+        <input type="date" id="fecha" class="form-control">
       </div>
     </div>
 
+    <!-- Séptimo Campo -->
     <div class="form-group">
-      <label for="text-area">Descripción del Producto (Objetivo, Solución, Contexto, etc)</label>
-      <div class="input-container">
-        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="descripcionProducto" name="descripcionProducto"></textarea>
-
-        <button type="button" class="info-btn">
+      <label for="text-area">Descripción del Producto (Objetivo, Solución, Contexto, etc)
+        <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
           <span class="custom-tooltip">Proporciona una descripción completa del producto.</span>
-        </button>
+        </div>
+      </label>
+      <div class="input-container">
+        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="descripcionProducto" name="descripcionProducto"></textarea>
       </div>
     </div>
 
-
-
+    <!-- Botón de Enviar Solicitud -->
     <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
-
   </form>
 </div>

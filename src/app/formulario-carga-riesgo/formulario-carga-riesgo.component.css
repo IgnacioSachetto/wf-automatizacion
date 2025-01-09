@@ -1,15 +1,23 @@
+/* Estilo global */
+html, body {
+  overflow-x: hidden; /* Elimina la barra de desplazamiento horizontal */
+}
+
+/* Contenedor del formulario */
 .form-container {
   flex: 1;
   padding: 1rem;
-  max-width: 80vw; /* Ancho máximo del formulario */
-  width: 100%;
+  max-width: 75vw; /* Ancho máximo del formulario */
+  width: 80vw;
   margin: 1px auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
+  overflow-x: hidden; /* Elimina el desbordamiento horizontal en el formulario */
 }
 
+/* Estilo para el encabezado del formulario */
 h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -22,11 +30,11 @@ h2 {
 }
 
 .form-group label {
-  display: block;
+  display: inline-flex; /* Usar inline-flex para que el texto y el ícono estén en la misma línea */
+  align-items: center; /* Alinea el ícono verticalmente con el texto */
   margin-bottom: 0.5rem;
   color: #333;
 }
-
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -34,37 +42,41 @@ h2 {
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box; /* Evita el desbordamiento al agregar padding */
 }
 
-/* Estilo para el contenedor de la entrada */
+/* Contenedor para el icono de información */
 .input-container {
   position: relative;
+  overflow-x: hidden; /* Previene desbordamiento horizontal en el contenedor */
 }
 
-/* Estilo del contenedor del icono de información */
+/* Contenedor del icono de información */
 .info-icon-container {
-  position: absolute;
-  top: 50%;
-  right: -30px; /* Ajusta este valor para que esté más alejado del input */
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: inline-block;
+    align-items: center;
+  margin-left: 8px; /* Añadir margen para espacio entre el texto y el ícono */
+  margin-top:3px;
 }
 
+/* Estilos para la imagen del ícono de información */
 .info-icon {
-  width: 20px;
-  height: 20px;
-  opacity: 0.6;
-  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0.5;
 }
 
+
+/* Efecto hover para el ícono de información */
 .info-icon:hover {
   opacity: 1;
 }
 
-/* Estilo del tooltip personalizado */
+/* Estilos para el tooltip personalizado */
 .custom-tooltip {
-  visibility: hidden;
   width: 200px;
   background-color: #333;
   color: #fff;
@@ -78,8 +90,10 @@ h2 {
   transform: translateY(-50%);
   opacity: 0;
   transition: opacity 0.3s;
+  font-size:10px;
 }
 
+/* Mostrar el tooltip cuando el botón está en hover */
 .info-icon-container:hover .custom-tooltip {
   visibility: visible;
   opacity: 1;
@@ -91,6 +105,7 @@ button[type="submit"], .agregar-riesgos {
   width: 100%; /* Asegura que los botones tengan el mismo ancho */
 }
 
+/* Botones con estilo */
 .nav-btn-form.btn-filled, .agregar-riesgos {
   background-color: #50007f; /* Color de fondo */
   color: white;
@@ -112,7 +127,7 @@ button[type="submit"], .agregar-riesgos {
   display: block;
   width: 50%;
   margin: auto;
-  margin-top:20px;
+  margin-top: 20px;
   height: 50px;
 }
 
@@ -135,12 +150,14 @@ button[type="submit"], .agregar-riesgos {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5); /* Sombra a la derecha */
 }
 
+/* Asegura que las tablas no causen desbordamiento horizontal */
 .table-container {
-  overflow-x: auto;
+  overflow-x: hidden; /* Evita el desplazamiento horizontal en la tabla */
+  width: 100%;
 }
 
 .table {
-  width: 70vw;
+  width: 100%; /* Usa el 100% del ancho disponible */
   border-collapse: collapse;
   margin: 0 auto;
   table-layout: fixed; /* Hace que las columnas tengan un ancho fijo */
