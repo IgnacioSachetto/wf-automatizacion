@@ -9,12 +9,18 @@ body, html {
   padding: 1rem;
   max-width: 80vw; /* Ancho máximo del formulario */
   width: 80vw;
-  margin: 1px auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
   overflow-x: hidden; /* Elimina el desbordamiento horizontal en el formulario */
+  margin-top:3%;
+
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group {
@@ -153,4 +159,26 @@ button[type="button"] {
 .info-icon-container:hover .custom-tooltip {
   visibility: visible;
   opacity: 1;
+}
+button[type="submit"] {
+  display: block;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  height: 50px;
+}
+.nav-btn-form.btn-filled{
+  background-color: #50007f; /* Color de fondo */
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 14px;
+  font-weight: bold;
+}
+
+.nav-btn-form.btn-filled:hover {
+  background-color: #4a148c; /* Color al pasar el mouse */
 }

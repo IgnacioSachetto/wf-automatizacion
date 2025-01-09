@@ -9,12 +9,12 @@ html, body {
   padding: 1rem;
   max-width: 75vw; /* Ancho máximo del formulario */
   width: 80vw;
-  margin: 1px auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
   overflow-x: hidden; /* Elimina el desbordamiento horizontal en el formulario */
+  margin-top:3%;
 }
 
 /* Estilo para el encabezado del formulario */

@@ -1,16 +1,44 @@
 <div class="navbar-container">
   <nav class="navbar">
-
-    <div class="sidebar-image-container">
-      <img class="logo-risk" src="../assets/images/RiskLogo.png" alt="Site Riesgo Logo">
-      <img class="logo-nx" src="../assets/images/NxLogo.png" alt="Site Riesgo NX">
-    </div>
-
+    <!-- Elementos adaptados del sidebar como botones -->
     <div class="nav-buttons">
-      <button class="nav-btn btn-outline">Nueva Iniciativa IA</button>
-      <button class="nav-btn btn-filled">Nueva Iniciativa</button>
+      <div class="logo-container">
+        <img class="logo-risk" src="../assets/images/RiskLogo.png" alt="Site Riesgo Logo" (click)="redirectToBase()">
+        <img class="logo-nx" src="../assets/images/NxLogo.png" alt="Site Riesgo NX" (click)="redirectToBase()">
+      </div>
+
+
+
+      <div class="dropdown">
+        <button class="nav-btn btn-filled" (click)="navigateTo('/pantalla-intermedia-producto')">
+          <img src="../assets/images/logo-app.png" alt="Logo Home" class="navbar-logo">
+          Nuevos Productos
+        </button>
+        <div class="dropdown-content">
+          <a href="/formulario-nueva-iniciativa">Nuevos Productos</a>
+          <a href="/formulario-carga-riesgos">Carga de Riesgos (Solo Referentes)</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="nav-btn btn-disabled" (click)="navigateTo('/pantalla-intermedia-ia')">
+          <img src="../assets/images/12113767.png" alt="Logo 2" class="navbar-logo">
+          Iniciativas IA
+        </button>
+
+      </div>
+
+      <div class="dropdown">
+        <button class="nav-btn btn-disabled" (click)="navigateTo('/cargar-riesgos')">
+          <img src="../assets/images/salubridad.png" alt="Logo 2" class="navbar-logo">
+          Salubridad de Productos
+        </button>
+      </div>
+
+      <!-- Botón Salir pegado a la derecha -->
+      <button class="btn-red" (click)="navigateTo('/salir')">
+        Salir
+      </button>
     </div>
   </nav>
-
-
 </div>

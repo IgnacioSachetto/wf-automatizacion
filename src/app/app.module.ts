@@ -16,15 +16,15 @@ import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-produ
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 const appRoutes: Routes = [
-  { path: '', component: NavbarComponent }, // Solo muestra Navbar y Sidebar en la ruta raíz
   { path: 'pantalla-intermedia-producto', component: PantallaIntermediaProductoComponent },
   { path: 'pantalla-intermedia-ia', component: PantallaIntermediaIaComponent },
   { path: 'formulario-carga-riesgos', component: FormularioCargaRiesgoComponent },
   { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIaComponent },
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
-  { path: '**', redirectTo: '' } // Redirige cualquier ruta no definida a la raíz
+  { path: '*', redirectTo: '' } // Redirige cualquier ruta no definida a la raíz
 ];
+
 
 @NgModule({
   declarations: [
