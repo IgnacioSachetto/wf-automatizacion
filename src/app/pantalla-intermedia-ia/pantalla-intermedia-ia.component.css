@@ -27,3 +27,25 @@
 .action-button:focus {
   outline: none;
 }
+
+.action-button-carga {
+  display: block;
+  width: 100%; /* Estirar el botón para que ocupe todo el ancho */
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #e98533;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-button-carga:hover {
+  background-color: #ee6c02;
+}
+
+.action-button-carga:focus {
+  outline: none;
+}

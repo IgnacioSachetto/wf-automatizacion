@@ -9,28 +9,25 @@
   <div class="main-content">
     <!-- Pantalla Intermedia Producto -->
     <app-pantalla-intermedia-producto *ngIf="currentScreen === 'pantalla-intermedia-producto'"
-                                      (formOpened)="onFormOpened($event)">
+      (formOpened)="onFormOpened($event)">
     </app-pantalla-intermedia-producto>
 
     <!-- Pantalla Intermedia IA -->
-    <app-pantalla-intermedia-ia *ngIf="currentScreen === 'pantalla-intermedia-ia'"
-                                (formOpened)="onFormOpened($event)">
+    <app-pantalla-intermedia-ia *ngIf="currentScreen === 'pantalla-intermedia-ia'" (formOpened)="onFormOpened($event)">
     </app-pantalla-intermedia-ia>
 
     <!-- Formulario Iniciativa -->
-    <app-formulario-iniciativa *ngIf="selectedForm === 'nueva-iniciativa'"
-                               (formSubmitted)="onFormSubmitted()">
+    <app-formulario-iniciativa *ngIf="selectedForm === 'nueva-iniciativa'" (formSubmitted)="onFormSubmitted()">
     </app-formulario-iniciativa>
 
-    <app-formulario-carga-riesgo
-    *ngIf="selectedForm === 'cargar-riesgos'"
-    (formSubmitted)="onFormSubmitted()">
-  </app-formulario-carga-riesgo>
+    <app-formulario-nueva-iniciativa-ia *ngIf="selectedForm === 'nueva-iniciativa-ia'" (formSubmitted)="onFormSubmitted()">
+    </app-formulario-nueva-iniciativa-ia>
 
-  <app-formulario-carga-riesgo-ia
-  *ngIf="selectedForm === 'cargar-riesgos-ia'"
-  (formSubmitted)="onFormSubmitted2()">
-</app-formulario-carga-riesgo-ia>
+    <app-formulario-carga-riesgo *ngIf="selectedForm === 'cargar-riesgos'" (formSubmitted)="onFormSubmitted()">
+    </app-formulario-carga-riesgo>
+
+    <app-formulario-carga-riesgo-ia *ngIf="selectedForm === 'cargar-riesgos-ia'" (formSubmitted)="onFormSubmitted2()">
+    </app-formulario-carga-riesgo-ia>
 
   </div>
 </div>

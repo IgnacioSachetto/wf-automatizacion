@@ -1,0 +1,170 @@
+.form-container {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1000px; /* Limita el ancho máximo del formulario */
+  width: 60%; /* Asegura que el formulario ocupe el 100% del ancho disponible */
+  margin: 1px auto; /* Márgenes automático para centrar el formulario horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido dentro del formulario verticalmente */
+}
+
+
+.form-group {
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.nav-btn-form {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.btn-outline {
+  border: 2px solid #5a189a;
+  background: white;
+  color: #5a189a;
+}
+
+.btn-filled {
+  background: #5a189a;
+  color: white;
+}
+
+textarea {
+  resize: vertical;  /* Permite que el textarea se redimensione solo verticalmente */
+  width: 100%;        /* Ocupa todo el ancho disponible */
+  box-sizing: border-box; /* Asegura que el padding no afecte al ancho total */
+  overflow: hidden;   /* Elimina el scroll */
+  min-height: 4em;    /* Establece la altura mínima, puedes ajustarla */
+  height: auto;       /* Permite que la altura se ajuste automáticamente */
+  padding: 10px;      /* Opcional, para un poco de espacio interno */
+}
+
+
+/* Estilo para el select */
+#compañia.form-control {
+  width: 100%; /* Hace que el select ocupe todo el ancho del contenedor */
+  padding: 8px 12px; /* Espaciado interno para el texto */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 14px; /* Ajusta el tamaño del texto */
+  background-color: #fff; /* Fondo blanco */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+/* Cuando el select está enfocado */
+#compañia.form-control:focus {
+  border-color: #360765; /* Color de borde al hacer foco */
+  outline: none; /* Elimina el contorno predeterminado */
+  background-color: #f7f7f7; /* Fondo gris claro al estar enfocado */
+}
+
+/* Para asegurarnos de que los selectores de otros navegadores no sobreescriban el estilo */
+select.form-control {
+  -webkit-appearance: none; /* Eliminar la apariencia predeterminada en Webkit */
+  -moz-appearance: none; /* Eliminar la apariencia predeterminada en Firefox */
+  appearance: none; /* Eliminar la apariencia predeterminada en otros navegadores */
+}
+
+/* Contenedor del select y el botón de información */
+.select-container,
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Estilos comunes para inputs, select y textarea */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Botón de información */
+button[type="button"] {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    right: -50px;  /* Mueve el icono fuera del campo de texto */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Estilo de la imagen dentro del botón */
+.info-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity:0.5;
+}
+
+/* Estilo de la imagen dentro del botón */
+.info-icon:hover {
+
+    opacity:1;
+}
+
+/* Estilo del tooltip personalizado */
+.custom-tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 105%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Mostrar el tooltip cuando el botón está en hover */
+button[type="button"]:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Ajuste adicional para los inputs y select para dejar espacio para el icono */
+.form-group input {
+    padding-right: 50px; /* Deja espacio suficiente para el icono */
+}
+
+.form-group select {
+    padding-right: 50px; /* Deja espacio suficiente para el icono */
+}
+
