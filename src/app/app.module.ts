@@ -1,8 +1,9 @@
-import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- Asegúrate de que FormsModule esté importado
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
@@ -13,6 +14,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+
+const appRoutes: Routes = [
+  { path: '', component: NavbarComponent }, // Solo muestra Navbar y Sidebar en la ruta raíz
+  { path: 'pantalla-intermedia-producto', component: PantallaIntermediaProductoComponent },
+  { path: 'pantalla-intermedia-ia', component: PantallaIntermediaIaComponent },
+  { path: 'formulario-carga-riesgos', component: FormularioCargaRiesgoComponent },
+  { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIaComponent },
+  { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
+  { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
+  { path: '**', redirectTo: '' } // Redirige cualquier ruta no definida a la raíz
+];
 
 @NgModule({
   declarations: [
@@ -25,24 +37,21 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FormularioCargaRiesgoComponent,
     FormularioCargaRiesgoIaComponent,
     FormularioNuevaIniciativaIaComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,  // Necesario para Toastr
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-right',   // Ubicación del toast
-      timeOut: 3000,                     // Duración del toast
-      closeButton: true,                 // Mostrar botón de cerrar
-      progressBar: true,                 // Mostrar barra de progreso
-      preventDuplicates: true,           // Evitar duplicados
-      newestOnTop: true                  // Colocar el toast más reciente arriba
-    })
-
+      positionClass: 'toast-top-right',
+      timeOut: 3000,
+      closeButton: true,
+      progressBar: true,
+      preventDuplicates: true,
+      newestOnTop: true
+    }),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

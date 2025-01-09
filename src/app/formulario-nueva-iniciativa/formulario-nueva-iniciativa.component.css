@@ -1,7 +1,6 @@
 .form-container {
   flex: 1;
   padding: 1rem;
-  max-width: 1000px; /* Limita el ancho máximo del formulario */
   width: 100%; /* Asegura que el formulario ocupe el 100% del ancho disponible */
   margin: 1px auto; /* Márgenes automático para centrar el formulario horizontalmente */
   display: flex;

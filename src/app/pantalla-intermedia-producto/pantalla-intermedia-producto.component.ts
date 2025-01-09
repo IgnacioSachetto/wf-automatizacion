@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pantalla-intermedia-producto',
@@ -6,9 +7,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./pantalla-intermedia-producto.component.css']
 })
 export class PantallaIntermediaProductoComponent {
-  @Output() formOpened = new EventEmitter<string>();
 
-  openForm(type: string) {
-    this.formOpened.emit(type); // Emitimos el tipo de formulario a abrir
+  constructor(private router: Router) {}
+
+  // Método para redirigir a las rutas de los formularios
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }
