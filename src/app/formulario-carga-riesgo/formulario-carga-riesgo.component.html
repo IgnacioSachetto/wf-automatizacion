@@ -25,6 +25,7 @@
           <option value="ALM & Finanzas Corporativa">ALM & Finanzas Corporativa</option>
           <option value="PLAFT">PLAFT</option>
           <option value="Marketing">Marketing</option>
+          <option value="area-select">Otro...</option>
         </select>
       </div>
     </div>
@@ -108,7 +109,7 @@
     </div>
 
     <button class="agregar-riesgos" type="button" (click)="agregarRiesgo()">Agregar Riesgo</button>
-    <div class="table-container" *ngIf="tablaVisible">
+    <div class="table-container" *ngIf="riesgosTemporales.length > 0">
       <label for="tabla">Resumen de Riesgos</label>
       <table class="table" name="tabla">
         <thead>
@@ -132,7 +133,12 @@
             </td>
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.tipo }}</div>
-              <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.tipo" class="input-sin-borde" name="tipo{{i}}" disabled/>
+              <div *ngIf="riesgo.editando">
+                <select [(ngModel)]="riesgo.tipo" class="input-sin-borde" name="tipo{{i}}" required>
+                  <option value="riesgo">Riesgo</option>
+                  <option value="recomendacion">Recomendación</option>
+                </select>
+              </div>
             </td>
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.descripcion }}</div>
@@ -142,6 +148,7 @@
               <button *ngIf="!riesgo.editando" (click)="editarCampo(riesgo)">Editar</button>
               <button *ngIf="riesgo.editando" (click)="guardarCampo(riesgo, i)">Guardar</button>
               <button *ngIf="riesgo.editando" (click)="cancelarEdicion(riesgo)">Cancelar</button>
+              <button *ngIf="!riesgo.editando" (click)="eliminarRiesgo(i)">Eliminar</button>
             </td>
           </tr>
         </tbody>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router'; // Importa Router
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
 import { ExcelService } from '../services/excel.service';
@@ -26,7 +27,8 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private jiraService: JiraService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private router: Router // Inyecta Router
   ) {}
 
   ngOnInit() {
@@ -54,7 +56,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
       this.jiraService.crearIssueEnJira(tituloConPrefijo, riesgo.descripcion, '10038').subscribe(
         () => {
-          this.toastr.success('Elemento registrado exitosamente en Jira', 'Éxito');
+          this.toastr.success('Formulario enviado correctamente!', 'Éxito');
         },
         (error) => {
           this.toastr.error('No se pudo registrar el elemento.', 'Error');
@@ -64,7 +66,13 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
     this.riesgosTemporales = [];
     this.formSubmitted.emit();
+
+
+    setTimeout(() => {
+      this.router.navigate(['/pantalla-intermedia-producto']);
+    }, 2000);
   }
+
 
   agregarRiesgo() {
     this.riesgosTemporales.push({
@@ -90,8 +98,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.toastr.success('Riesgo agregado correctamente!');
   }
 
-
-
   editarCampo(riesgo: any) {
     riesgo.original = {
       titulo: riesgo.titulo,
@@ -102,13 +108,18 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
     riesgo.editando = true;
   }
+
   guardarCampo(riesgo: any, index: number) {
-
     riesgo.editando = false;
-
     this.riesgosTemporales[index] = { ...riesgo };
-
     console.log('Riesgo actualizado', this.riesgosTemporales[index]);
+  }
+
+  eliminarRiesgo(index: number) {
+    this.riesgosTemporales.splice(index, 1);
+    if (this.riesgosTemporales.length === 0) {
+      this.tablaVisible = false;
+    }
   }
 
   cancelarEdicion(riesgo: any) {
@@ -124,5 +135,4 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     event.preventDefault();
     this.finalizarCargaRiesgos();
   }
-
 }
