@@ -72,11 +72,12 @@
     <div class="form-group">
       <label for="iniciativa">Iniciativa en Curso</label>
       <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa">
-        <option *ngFor="let iniciativa of iniciativasEnCurso" [value]="iniciativa">
-          {{ iniciativa }}
+        <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
+          {{ iniciativa.epicId }} - {{ iniciativa.summary }}
         </option>
       </select>
     </div>
+
 
     <div class="form-group">
       <label for="tipo">
@@ -118,7 +119,10 @@
             <th>Título</th>
             <th>Tipo</th>
             <th>Descripción</th>
+            <th>Iniciativa</th> <!-- Nueva columna -->
+
             <th>Acción</th>
+
           </tr>
         </thead>
         <tbody>
@@ -144,6 +148,19 @@
               <div *ngIf="!riesgo.editando">{{ riesgo.descripcion }}</div>
               <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.descripcion" class="input-sin-borde" name="descripcion{{i}}"/>
             </td>
+            <td>
+              <div *ngIf="!riesgo.editando">{{ riesgo.iniciativaSeleccionada?.summary }}</div>
+              <div *ngIf="riesgo.editando">
+                <select [(ngModel)]="riesgo.iniciativaSeleccionada" class="input-sin-borde" name="iniciativa{{i}}" required>
+                  <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
+                    {{iniciativa.summary}} <!-- Muestra el resumen de la iniciativa -->
+                  </option>
+                </select>
+              </div>
+            </td>
+
+
+
             <td>
               <button *ngIf="!riesgo.editando" (click)="editarCampo(riesgo)">Editar</button>
               <button *ngIf="riesgo.editando" (click)="guardarCampo(riesgo, i)">Guardar</button>

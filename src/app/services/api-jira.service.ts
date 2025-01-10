@@ -11,11 +11,16 @@ export class JiraService {
 
   constructor(private http: HttpClient) {}
 
-  crearIssueEnJira(nombre: string, descripcion: string, issueTypeId: string): Observable<any> {
+  crearIssueEnJira(
+    nombre: string,
+    descripcion: string,
+    issueTypeId: string,
+    epicId?: string  ): Observable<any> {
     const payload = {
       summary: nombre,
       description: descripcion,
       issueTypeId: issueTypeId,
+      epicId: epicId,
     };
 
     return this.http.post(this.jiraApiUrl, payload).pipe(
