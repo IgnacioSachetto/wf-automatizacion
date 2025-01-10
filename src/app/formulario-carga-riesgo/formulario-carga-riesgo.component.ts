@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
-import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-formulario-carga-riesgo',
@@ -22,26 +22,31 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
   riesgosTemporales: { areaSeleccionada: string, titulo: string, descripcion: string, iniciativa: string, tipo: string, editando?: boolean }[] = [];
 
-  private excelURL: string = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQAUCdcrxaFkPOWeHCNvsSyC6fMRLP49B2smkue0CQQSatzBWYz_QQK379bv4HfLauNM51jhUMf99y9/pubhtml';
 
   constructor(
     private toastr: ToastrService,
     private jiraService: JiraService,
-    private excelService: ExcelService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
+
   ) {}
 
   ngOnInit() {
-    this.cargarIniciativasDesdeExcel();
+    this.cargarIniciativasDesdeBackend();
   }
 
-  cargarIniciativasDesdeExcel() {
-    this.excelService.cargarExcelDesdeURL(this.excelURL).then((datos) => {
-      this.iniciativasEnCurso = datos
-        .slice(1)
-        .filter((fila) => fila[0] && fila[1])
-        .map((fila) => fila[1]);
-    });
+  cargarIniciativasDesdeBackend() {
+    this.http.get<any>('http://localhost:3000/jira-api/getAllEpicInProgress').subscribe(
+      (response) => {
+        this.iniciativasEnCurso = response.data || [];
+        console.log('Iniciativas en curso:', this.iniciativasEnCurso);
+
+      },
+      (error) => {
+        this.toastr.error('Hubo un error al cargar las iniciativas en curso');
+        console.error('Error al cargar iniciativas:', error);
+      }
+    );
   }
 
   finalizarCargaRiesgos() {
