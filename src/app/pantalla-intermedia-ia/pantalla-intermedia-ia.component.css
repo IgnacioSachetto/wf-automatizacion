@@ -8,7 +8,7 @@
 
 .action-button {
   display: block;
-  width: 100%; /* Estirar el botón para que ocupe todo el ancho */
+  width: 100%;
   padding: 15px;
   margin: 10px 0;
   background-color: #360765;
@@ -30,7 +30,7 @@
 
 .action-button-carga {
   display: block;
-  width: 100%; /* Estirar el botón para que ocupe todo el ancho */
+  width: 100%;
   padding: 15px;
   margin: 10px 0;
   background-color: #e98533;

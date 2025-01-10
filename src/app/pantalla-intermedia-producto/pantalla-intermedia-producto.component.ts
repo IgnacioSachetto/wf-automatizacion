@@ -10,7 +10,6 @@ export class PantallaIntermediaProductoComponent {
 
   constructor(private router: Router) {}
 
-  // Método para redirigir a las rutas de los formularios
   navigateTo(route: string) {
     this.router.navigate([route]);
   }

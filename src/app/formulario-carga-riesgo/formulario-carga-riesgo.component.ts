@@ -49,7 +49,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     }
 
     this.riesgosTemporales.forEach(riesgo => {
-      // Aplica el prefijo solo cuando se envíe a Jira
       const prefijo = riesgo.tipo === 'riesgo' ? '[RIESGO]' : '[RECOMENDACIÓN]';
       const tituloConPrefijo = `${prefijo} ${riesgo.titulo}`;
 
@@ -63,7 +62,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       );
     });
 
-    // Limpiar riesgos temporales después de enviarlos a Jira
     this.riesgosTemporales = [];
     this.formSubmitted.emit();
   }
@@ -78,7 +76,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       editando: false,
     });
 
-    // Reseteo los campos del formulario
     this.areaSeleccionada = '';
     this.tituloRiesgo = '';
     this.descripcionRiesgo = '';
@@ -96,7 +93,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
 
   editarCampo(riesgo: any) {
-    // Guardamos los valores originales para poder restaurarlos si es necesario
     riesgo.original = {
       titulo: riesgo.titulo,
       descripcion: riesgo.descripcion,
@@ -104,30 +100,23 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       areaSeleccionada: riesgo.areaSeleccionada
     };
 
-    // Activamos el modo de edición
     riesgo.editando = true;
   }
-  // Función para guardar los cambios
   guardarCampo(riesgo: any, index: number) {
-    // Aquí podemos enviar los datos al servidor si es necesario
 
-    // Desactivamos el modo de edición
     riesgo.editando = false;
 
-    // Actualizamos el valor de la fila con los datos nuevos
     this.riesgosTemporales[index] = { ...riesgo };
 
     console.log('Riesgo actualizado', this.riesgosTemporales[index]);
   }
 
   cancelarEdicion(riesgo: any) {
-    // Restauramos los valores originales
     riesgo.titulo = riesgo.original.titulo;
     riesgo.descripcion = riesgo.original.descripcion;
     riesgo.tipo = riesgo.original.tipo;
     riesgo.areaSeleccionada = riesgo.original.areaSeleccionada;
 
-    // Desactivamos el modo de edición
     riesgo.editando = false;
   }
 

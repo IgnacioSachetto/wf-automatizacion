@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'formulario-carga-riesgo', component: FormularioCargaRiesgoComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent},
 
-  { path: '', redirectTo: '', pathMatch: 'full' }, // No redirige a ninguna pantalla, se queda en blanco
+  { path: '', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

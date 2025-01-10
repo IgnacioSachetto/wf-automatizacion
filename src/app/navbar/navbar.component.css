@@ -1,12 +1,11 @@
-/* Contenedor principal que tiene los logos y los botones */
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* Distribuye los elementos */
-  align-items: center; /* Alinea verticalmente el logo y los botones */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 1rem;
-  border-bottom: 2px solid #5a189a; /* Borde inferior para separar del contenido */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para resaltar el navbar */
+  border-bottom: 2px solid #5a189a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo-container img {
@@ -14,85 +13,72 @@
 }
 
 .logo-container img:hover {
-  transform: scale(1.1); /* Aumenta el tamaño del logo al 10% */
-  cursor: pointer; /* Cambia el cursor a 'pointer' cuando se pasa el mouse por encima */
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-
-/* Contenedor de los logos */
 .logo-container {
   display: flex;
-  gap: 10px; /* Espacio entre los logos */
+  gap: 10px;
 }
 
-/* Logos principales (esquina izquierda) */
 .logo-risk, .logo-nx {
-  height: 40px; /* Tamaño específico para los logos */
-  width: auto; /* Mantiene la proporción */
+  height: 40px;
+  width: auto;
 }
 
-/* Contenedor de los botones en la barra de navegación */
 .nav-buttons {
   display: flex;
-  gap: 20px; /* Espacio entre los botones */
-  align-items: center; /* Alinea los botones verticalmente */
-  justify-content: space-between; /* Distribuye los botones a lo largo del espacio disponible */
-  flex-grow: 1; /* Hace que el contenedor ocupe todo el espacio disponible */
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
   width: auto;
   max-width: 750px;
 }
 
-/* Los botones y dropdown ocupan espacio equitativo */
 .nav-buttons .nav-btn, .nav-buttons .dropdown {
-  flex-grow: 1; /* Los botones crecerán para ocupar el espacio disponible */
-  text-align: center; /* Centra el texto dentro de cada botón */
+  flex-grow: 1;
+  text-align: center;
 }
 
-/* Contenedor del dropdown, para alinearlos a la derecha */
 .nav-buttons .dropdown {
-  position: relative; /* Necesario para el dropdown */
+  position: relative;
 }
 
-/* Menú desplegable */
 .dropdown-content {
-  display: none; /* Oculto por defecto */
+  display: none;
   position: absolute;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  width: 100%; /* Ancho mínimo */
+  width: 100%;
   z-index: 1;
-  top: 100%; /* Aparece justo debajo del botón */
-  right: 0; /* Alineado con el botón */
+  top: 100%;
+  right: 0;
   border-radius: 5px;
   padding: 0.5rem 0;
-  flex-direction: column; /* Opciones en formato vertical */
-  background-color: white; /* Fondo violeta al pasar el mouse */
-  color:#50007F;
-
+  flex-direction: column;
+  background-color: white;
+  color: #50007F;
 }
 
-/* Estilo para las opciones del menú */
 .dropdown-content a {
   display: block;
   padding: 0.5rem 1rem;
-  color:#50007F;
+  color: #50007F;
   text-decoration: none;
   font-size: 14px;
   transition: background-color 0.3s;
-
 }
 
 .dropdown-content a:hover {
-  background-color: #5a189a; /* Fondo violeta al pasar el mouse */
-  color: white; /* Texto blanco en el hover */
+  background-color: #5a189a;
+  color: white;
 }
 
-/* Mostrar el menú al hacer hover */
 .dropdown:hover .dropdown-content {
-  display: flex; /* Opciones mostradas como bloque vertical */
-
+  display: flex;
 }
 
-/* Botones principales */
 .nav-btn {
   display: flex;
   align-items: center;
@@ -108,10 +94,9 @@
   transition: all 0.3s ease;
 }
 
-/* Efecto hover para los botones */
 .nav-btn:hover {
   opacity: 0.9;
-  transform: translateY(-2px); /* Elevación en hover */
+  transform: translateY(-2px);
 }
 
 .btn-filled {
@@ -119,25 +104,22 @@
   color: white;
   border: 2px solid #5a189a;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .btn-disabled {
-  background-color: #d3d3d3; /* Gris claro */
-  color: black; /* Gris oscuro para el texto */
-  border: 1px solid #c0c0c0; /* Borde gris */
-  cursor: not-allowed; /* Cambia el cursor para indicar que no es interactivo */
-  opacity: 0.6; /* Reduce la opacidad para dar un efecto de inactividad */
-  pointer-events: none; /* Desactiva todos los eventos de mouse */
+  background-color: #d3d3d3;
+  color: black;
+  border: 1px solid #c0c0c0;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-disabled:hover {
-  background-color: #d3d3d3; /* Mantiene el color al hacer hover */
-  color: black; /* Mantiene el texto al hacer hover */
+  background-color: #d3d3d3;
+  color: black;
 }
 
-
-/* Botón "Salir" rojo con posicionamiento absoluto */
 .btn-red {
   display: flex;
   align-items: center;
@@ -151,29 +133,25 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
   transition: all 0.3s ease;
-  position: absolute; /* Cambiado a absolute */
-  top: auto; /* Ajusta la distancia desde la parte superior */
-  right: 10px; /* Ajusta la distancia desde la parte derecha */
-  width: auto; /* Ancho automático para ajustar al contenido */
-  flex-shrink: 0; /* Evita que el botón se encoja */
+  position: absolute;
+  top: auto;
+  right: 10px;
+  width: auto;
+  flex-shrink: 0;
 }
 
-/* Efecto hover para los botones */
 .btn-red:hover {
-  background-color: red; /* Fondo rojo más oscuro al hacer hover */
+  background-color: red;
   border: 2px solid #5a189a;
-  color:white;
-  transform: translateY(-2px); /* Elevación al hacer hover */
+  color: white;
+  transform: translateY(-2px);
 }
 
-
-/* Ajuste del tamaño de las imágenes en los botones del navbar */
 .navbar-logo {
-  height: 24px; /* Ajusta según lo necesario */
-  width: auto; /* Mantiene la proporción de la imagen */
+  height: 24px;
+  width: auto;
 }
 
-/* Responsividad */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -186,6 +164,6 @@
   }
 
   .dropdown-content {
-    right: 0; /* Mantener el menú alineado en pantallas pequeñas */
+    right: 0;
   }
 }

@@ -1,40 +1,37 @@
-/* Estilo global */
 html, body {
-  overflow-x: hidden; /* Elimina la barra de desplazamiento horizontal */
+  overflow-x: hidden;
 }
 
-/* Contenedor del formulario */
 .form-container {
   flex: 1;
   padding: 1rem;
-  max-width: 75vw; /* Ancho máximo del formulario */
+  max-width: 75vw;
   width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
-  overflow-x: hidden; /* Elimina el desbordamiento horizontal en el formulario */
-  margin-top:3%;
+  overflow-x: hidden;
+  margin-top: 3%;
 }
 
-/* Estilo para el encabezado del formulario */
 h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Estilos para los grupos de formulario */
 .form-group {
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }
 
 .form-group label {
-  display: inline-flex; /* Usar inline-flex para que el texto y el ícono estén en la misma línea */
-  align-items: center; /* Alinea el ícono verticalmente con el texto */
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 0.5rem;
   color: #333;
 }
+
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -42,25 +39,22 @@ h2 {
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-sizing: border-box; /* Evita el desbordamiento al agregar padding */
+  box-sizing: border-box;
 }
 
-/* Contenedor para el icono de información */
 .input-container {
   position: relative;
-  overflow-x: hidden; /* Previene desbordamiento horizontal en el contenedor */
+  overflow-x: hidden;
 }
 
-/* Contenedor del icono de información */
 .info-icon-container {
   position: relative;
   display: inline-block;
-    align-items: center;
-  margin-left: 8px; /* Añadir margen para espacio entre el texto y el ícono */
-  margin-top:3px;
+  align-items: center;
+  margin-left: 8px;
+  margin-top: 3px;
 }
 
-/* Estilos para la imagen del ícono de información */
 .info-icon {
   width: 15px;
   height: 15px;
@@ -69,13 +63,10 @@ h2 {
   opacity: 0.5;
 }
 
-
-/* Efecto hover para el ícono de información */
 .info-icon:hover {
   opacity: 1;
 }
 
-/* Estilos para el tooltip personalizado */
 .custom-tooltip {
   width: 200px;
   background-color: #333;
@@ -90,24 +81,21 @@ h2 {
   transform: translateY(-50%);
   opacity: 0;
   transition: opacity 0.3s;
-  font-size:10px;
+  font-size: 10px;
 }
 
-/* Mostrar el tooltip cuando el botón está en hover */
 .info-icon-container:hover .custom-tooltip {
   visibility: visible;
   opacity: 1;
 }
 
-/* Estilo de los botones */
 button[type="submit"], .agregar-riesgos {
   margin-top: 20px;
-  width: 100%; /* Asegura que los botones tengan el mismo ancho */
+  width: 100%;
 }
 
-/* Botones con estilo */
 .nav-btn-form.btn-filled, .agregar-riesgos {
-  background-color: #50007f; /* Color de fondo */
+  background-color: #50007f;
   color: white;
   padding: 10px;
   border: none;
@@ -119,10 +107,9 @@ button[type="submit"], .agregar-riesgos {
 }
 
 .nav-btn-form.btn-filled:hover {
-  background-color: #4a148c; /* Color al pasar el mouse */
+  background-color: #4a148c;
 }
 
-/* Asegurar que los botones estén apilados */
 button[type="submit"], .agregar-riesgos {
   display: block;
   width: 50%;
@@ -132,7 +119,7 @@ button[type="submit"], .agregar-riesgos {
 }
 
 .agregar-riesgos {
-  background-color: #4386ec; /* Color de fondo */
+  background-color: #4386ec;
   color: white;
   padding: 10px;
   border: none;
@@ -141,26 +128,24 @@ button[type="submit"], .agregar-riesgos {
   font-size: 16px;
   font-weight: bold;
   border-radius: 14px;
-  transition: box-shadow 0.3s ease; /* Añade transición suave para la sombra */
+  transition: box-shadow 0.3s ease;
 }
 
-/* Efecto hover con sombra negra a la derecha */
 .agregar-riesgos:hover {
-  background-color: #0b5ed7; /* Color más oscuro al pasar el mouse */
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5); /* Sombra a la derecha */
+  background-color: #0b5ed7;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Asegura que las tablas no causen desbordamiento horizontal */
 .table-container {
-  overflow-x: hidden; /* Evita el desplazamiento horizontal en la tabla */
+  overflow-x: hidden;
   width: 100%;
 }
 
 .table {
-  width: 100%; /* Usa el 100% del ancho disponible */
+  width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
-  table-layout: fixed; /* Hace que las columnas tengan un ancho fijo */
+  table-layout: fixed;
 }
 
 .table th,
@@ -168,9 +153,9 @@ button[type="submit"], .agregar-riesgos {
   padding: 10px 12px;
   text-align: left;
   border: 1px solid #ddd;
-  overflow: hidden; /* Esconde el texto desbordado */
-  text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
-  white-space: nowrap; /* Evita que el texto haga un salto de línea */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .table th {
@@ -178,12 +163,10 @@ button[type="submit"], .agregar-riesgos {
   color: #333;
 }
 
-/* Específicamente para la columna "Descripción" */
-.table td:nth-child(2) { /* Asegúrate de que sea la posición correcta de la columna */
-  max-width: 200px; /* Ancho máximo para la descripción */
+.table td:nth-child(2) {
+  max-width: 200px;
 }
 
-/* Botones de acción */
 button {
   margin-left: 5px;
   padding: 5px 10px;
@@ -201,7 +184,6 @@ button:active {
   background-color: #ddd;
 }
 
-/* Estilos para inputs y textareas */
 input[type="text"], textarea {
   width: 100%;
   padding: 5px;
@@ -217,5 +199,5 @@ input[type="text"]:focus, textarea:focus {
 .input-sin-borde {
   border: none;
   outline: none;
-  box-shadow: none; /* Elimina el borde por enfoque también */
+  box-shadow: none;
 }

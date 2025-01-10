@@ -1,8 +1,7 @@
 <div class="form-container">
   <h2>Formulario de Solicitud - Nuevas Iniciativas IA</h2>
-  <form> <!-- Vincula el evento de envío con el método enviarFormulario -->
+  <form>
 
-    <!-- Referente de la Iniciativa -->
     <div class="form-group">
       <label for="email">Referente de la Iniciativa</label>
       <div class="input-container">
@@ -14,7 +13,6 @@
       </div>
     </div>
 
-    <!-- Título de la Iniciativa -->
     <div class="form-group">
       <label for="tituloIniciativa">Título de la Iniciativa</label>
       <div class="input-container">
@@ -26,7 +24,6 @@
       </div>
     </div>
 
-    <!-- Documentación del Proyecto -->
     <div class="form-group">
       <label for="documentacionProyecto">Documentación del Proyecto</label>
       <div class="input-container">
@@ -39,7 +36,6 @@
       </div>
     </div>
 
-    <!-- Fecha Estimada de Implementación -->
     <div class="form-group">
       <label for="fechaImplementacion">Fecha Estimada de Implementación</label>
       <div class="input-container">
@@ -51,7 +47,6 @@
       </div>
     </div>
 
-    <!-- Interesados en la Iniciativa -->
     <div class="form-group">
       <label for="interesadosIniciativa">Principales Interesados o Partes Involucradas</label>
       <div class="input-container">
@@ -64,7 +59,6 @@
       </div>
     </div>
 
-    <!-- Almacenamiento de Datos -->
     <div class="form-group">
       <label for="almacenamientoDatos">¿El modelo almacena datos críticos o de personas usuarias?</label>
       <div class="select-container">
@@ -80,7 +74,6 @@
       </div>
     </div>
 
-    <!-- Tipo de Iniciativa -->
     <div class="form-group">
       <label for="tipoIniciativa">Tipo de Iniciativa</label>
       <div class="select-container">
@@ -111,7 +104,6 @@
         </button>
       </div>
     </div>
-    <!-- Pregunta que se muestra solo si se selecciona "Desarrollo Externo" -->
 
 
     <div class="form-group" *ngIf="mostrarPreguntaProveedor">

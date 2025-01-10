@@ -1,7 +1,6 @@
 <div class="form-container">
   <h2>Carga de Riesgos IA - Solo Referentes</h2>
-  <form (ngSubmit)="enviarFormulario($event)"> <!-- Vincula el evento de envío con el método enviarFormulario -->
-    <!-- Área que levanta el riesgo -->
+  <form (ngSubmit)="enviarFormulario($event)">
       <div class="form-group">
           <label for="area-form">Área que levanta el riesgo:</label>
           <div class="select-container">
@@ -27,7 +26,6 @@
           </div>
       </div>
 
-      <!-- Nombre -->
       <div class="form-group">
           <label for="nombre">Nombre</label>
           <div class="input-container">
@@ -39,7 +37,6 @@
           </div>
       </div>
 
-      <!-- Focal Point -->
       <div class="form-group">
           <label for="focal-point">Focal Point</label>
           <div class="input-container">
@@ -51,7 +48,6 @@
           </div>
       </div>
 
-      <!-- Tipo -->
       <div class="form-group">
           <label for="tipo">Tipo</label>
           <div class="select-container">
@@ -67,7 +63,6 @@
           </div>
       </div>
 
-      <!-- Descripción del Riesgo -->
       <div class="form-group">
           <label for="riesgo">Descripción del Riesgo</label>
           <div class="input-container">

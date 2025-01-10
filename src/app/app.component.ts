@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el servicio Router
+import { Router } from '@angular/router';
 import { JiraService } from './services/api-jira.service';
 
 @Component({
@@ -8,40 +8,37 @@ import { JiraService } from './services/api-jira.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currentScreen: string = '';  // Para controlar la pantalla que se muestra
-  selectedForm: string = '';   // Para controlar qué formulario se muestra
+  currentScreen: string = '';
+  selectedForm: string = '';
 
   constructor(private router: Router, private jiraService: JiraService) {}
 
-  // Método para manejar el envío del formulario
   onFormSubmitted() {
-    this.selectedForm = 'pantalla-intermedia-producto'; // Establece el formulario como "pantalla-intermedia-producto"
-    this.currentScreen = 'pantalla-intermedia-producto'; // Configura la pantalla actual
+    this.selectedForm = 'pantalla-intermedia-producto';
+    this.currentScreen = 'pantalla-intermedia-producto';
 
 
 
 }
 
 onFormSubmitted2() {
-  this.selectedForm = 'pantalla-intermedia-ia'; // Establece el formulario como "pantalla-intermedia-producto"
-  this.currentScreen = 'pantalla-intermedia-ia'; // Configura la pantalla actual
+  this.selectedForm = 'pantalla-intermedia-ia';
+  this.currentScreen = 'pantalla-intermedia-ia';
 }
 
-  // Cuando se selecciona un formulario desde el Sidebar
   onFormSelected(formType: string) {
     console.log('Formulario seleccionado:', formType);
     this.selectedForm = formType;
-    this.currentScreen = formType; // Mostrar la pantalla seleccionada
+    this.currentScreen = formType;
   }
 
-  // Método para cerrar el formulario cuando se envíe
   onFormClosed() {
-    this.selectedForm = ''; // Cerrar el formulario
-    this.currentScreen = ''; // Ocultar la pantalla intermedia
+    this.selectedForm = '';
+    this.currentScreen = '';
   }
 
   onFormOpened(formType: string) {
-    this.selectedForm = formType; // Mostramos el formulario correspondiente
-    this.currentScreen = '';       // Ocultamos la pantalla intermedia
+    this.selectedForm = formType;
+    this.currentScreen = '';
   }
 }

@@ -13,7 +13,6 @@ import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/for
 import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 const appRoutes: Routes = [
   { path: 'pantalla-intermedia-producto', component: PantallaIntermediaProductoComponent },
@@ -22,7 +21,7 @@ const appRoutes: Routes = [
   { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIaComponent },
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
-  { path: '*', redirectTo: '' } // Redirige cualquier ruta no definida a la raíz
+  { path: '*', redirectTo: '' }
 ];
 
 
@@ -30,7 +29,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    SidebarComponent,
     PantallaIntermediaProductoComponent,
     FormularioIniciativaComponent,
     PantallaIntermediaIaComponent,

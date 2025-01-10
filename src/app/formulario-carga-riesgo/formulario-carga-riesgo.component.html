@@ -2,7 +2,6 @@
   <h2>Carga de Riesgos - Solo Referentes</h2>
   <form (ngSubmit)="enviarFormulario($event)">
 
-    <!-- Área que levanta el riesgo -->
     <div class="form-group">
       <label for="area-form">
         Área que levanta el riesgo:
@@ -30,7 +29,6 @@
       </div>
     </div>
 
-    <!-- Título del Riesgo -->
     <div class="form-group">
       <label for="tituloRiesgo">
         Título del Riesgo
@@ -44,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Nombre -->
     <div class="form-group">
       <label for="nombre">
         Nombre
@@ -58,7 +55,6 @@
       </div>
     </div>
 
-    <!-- Focal Point -->
     <div class="form-group">
       <label for="focal-point">
         Focal Point
@@ -72,7 +68,6 @@
       </div>
     </div>
 
-    <!-- Iniciativa en Curso -->
     <div class="form-group">
       <label for="iniciativa">Iniciativa en Curso</label>
       <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa">
@@ -82,7 +77,6 @@
       </select>
     </div>
 
-    <!-- Tipo -->
     <div class="form-group">
       <label for="tipo">
         Tipo
@@ -100,7 +94,6 @@
       </div>
     </div>
 
-    <!-- Descripción del Riesgo -->
     <div class="form-group">
       <label for="riesgo">
         Descripción del Riesgo
@@ -115,8 +108,6 @@
     </div>
 
     <button class="agregar-riesgos" type="button" (click)="agregarRiesgo()">Agregar Riesgo</button>
-
-    <!-- Resumen de Riesgos -->
     <div class="table-container" *ngIf="tablaVisible">
       <label for="tabla">Resumen de Riesgos</label>
       <table class="table" name="tabla">
@@ -157,7 +148,6 @@
       </table>
     </div>
 
-    <!-- Botón de envío -->
     <button *ngIf="enviarVisible" type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
   </form>
 </div>

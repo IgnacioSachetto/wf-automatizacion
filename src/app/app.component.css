@@ -1,4 +1,4 @@
 .main-content {
-  margin-top: 0; /* Asegúrate de que no haya margen extra en la parte inferior */
-  padding-top: 0; /* O también puedes revisar si hay padding en la parte inferior */
+  margin-top: 0;
+  padding-top: 0;
 }

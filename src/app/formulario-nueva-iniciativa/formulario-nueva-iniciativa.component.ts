@@ -8,10 +8,10 @@ import { JiraService } from '../services/api-jira.service';
   styleUrls: ['./formulario-nueva-iniciativa.component.css']
 })
 export class FormularioIniciativaComponent {
-  @Output() formSubmitted = new EventEmitter<void>(); // Emite un evento cuando se envía el formulario
+  @Output() formSubmitted = new EventEmitter<void>();
 
-  nombreProducto: string = ''; // Título de la tarea
-  descripcionProducto: string = ''; // Descripción de la tarea
+  nombreProducto: string = '';
+  descripcionProducto: string = '';
 
   constructor(
     private toastr: ToastrService,
@@ -20,9 +20,8 @@ export class FormularioIniciativaComponent {
   ) {}
 
   enviarFormulario(event: Event) {
-    event.preventDefault(); // Evita recargar la página
+    event.preventDefault();
 
-    // Mostrar mensaje de éxito
     this.toastr.success('Formulario enviado con éxito', '¡Éxito!', {
       positionClass: 'toast-top-right',
       timeOut: 3000,
@@ -30,21 +29,20 @@ export class FormularioIniciativaComponent {
       progressBar: true
     });
 
-    this.cdr.detectChanges(); // Forzar la detección de cambios
+    this.cdr.detectChanges();
 
-    // Llamar al servicio para crear una tarea en Jira
     setTimeout(() => {
       this.jiraService.crearIssueEnJira(this.nombreProducto, this.descripcionProducto, '10039').subscribe(
         (response) => {
           console.log('Tarea creada correctamente:', response);
           this.toastr.success('Tarea creada en Jira', '¡Éxito!');
-          this.formSubmitted.emit(); // Emitir evento al componente principal
+          this.formSubmitted.emit();
         },
         (error) => {
           console.error('Error al crear tarea en Jira:', error);
           this.toastr.error('Error al crear la tarea en Jira', 'Error');
         }
       );
-    }, 3000); // Simulación de retardo
+    }, 3000);
   }
 }

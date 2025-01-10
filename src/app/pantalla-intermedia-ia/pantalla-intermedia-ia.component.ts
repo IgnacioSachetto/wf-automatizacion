@@ -1,4 +1,3 @@
-// pantalla-intermedia-ia.component.ts
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -10,6 +9,6 @@ export class PantallaIntermediaIaComponent {
   @Output() formOpened = new EventEmitter<string>();
 
   openForm(type: string) {
-    this.formOpened.emit(type);  // Emite el tipo de formulario a abrir
+    this.formOpened.emit(type);
   }
 }
