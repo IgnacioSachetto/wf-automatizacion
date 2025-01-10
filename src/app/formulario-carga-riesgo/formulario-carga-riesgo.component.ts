@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router'; // Importa Router
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
 import { ExcelService } from '../services/excel.service';
@@ -28,7 +28,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     private toastr: ToastrService,
     private jiraService: JiraService,
     private excelService: ExcelService,
-    private router: Router // Inyecta Router
+    private router: Router
   ) {}
 
   ngOnInit() {

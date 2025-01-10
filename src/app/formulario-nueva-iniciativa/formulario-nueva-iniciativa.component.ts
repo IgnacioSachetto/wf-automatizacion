@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
 
@@ -16,7 +17,8 @@ export class FormularioIniciativaComponent {
   constructor(
     private toastr: ToastrService,
     private cdr: ChangeDetectorRef,
-    private jiraService: JiraService
+    private jiraService: JiraService,
+    private router: Router
   ) {}
 
   enviarFormulario(event: Event) {
@@ -34,13 +36,14 @@ export class FormularioIniciativaComponent {
     setTimeout(() => {
       this.jiraService.crearIssueEnJira(this.nombreProducto, this.descripcionProducto, '10039').subscribe(
         (response) => {
-          console.log('Tarea creada correctamente:', response);
-          this.toastr.success('Tarea creada en Jira', '¡Éxito!');
+          this.toastr.success('Iniciativa registrada en el WF', '¡Éxito!');
           this.formSubmitted.emit();
+
+          this.router.navigate(['/pantalla-intermedia-producto']);
         },
         (error) => {
           console.error('Error al crear tarea en Jira:', error);
-          this.toastr.error('Error al crear la tarea en Jira', 'Error');
+          this.toastr.error('Error al registrar la iniciativa', 'Error');
         }
       );
     }, 3000);
