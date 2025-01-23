@@ -10,6 +10,7 @@ import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/f
 import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
 import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/formulario-nueva-iniciativa.component';
+import { IniciativasEnCursoComponent } from './iniciativas-en-curso/iniciativas-en-curso.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
@@ -21,6 +22,8 @@ const appRoutes: Routes = [
   { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIaComponent },
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
+  { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent },
+
   { path: '*', redirectTo: '' }
 ];
 
@@ -35,6 +38,7 @@ const appRoutes: Routes = [
     FormularioCargaRiesgoComponent,
     FormularioCargaRiesgoIaComponent,
     FormularioNuevaIniciativaIaComponent,
+    IniciativasEnCursoComponent,
   ],
   imports: [
     BrowserModule,
