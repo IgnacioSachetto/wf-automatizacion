@@ -21,8 +21,9 @@ export class FormularioIniciativaComponent {
     referenteIT: '',
     compania: '',
     fechaEstimadaImplementacion: '',
-    // Agrega aquí todos los demás campos
   };
+
+  cargandoToast: any;
 
   constructor(
     private toastr: ToastrService,
@@ -34,28 +35,29 @@ export class FormularioIniciativaComponent {
   enviarFormulario(event: Event) {
     event.preventDefault();
 
-    this.toastr.success('Formulario enviado con éxito', '¡Éxito!', {
-      positionClass: 'toast-top-right',
-      timeOut: 3000,
-      closeButton: true,
-      progressBar: true
-    });
-
     this.cdr.detectChanges();
 
-    setTimeout(() => {
-      this.jiraService.crearEpicEnJira(this.nuevaIniciativa).subscribe(
-        (response) => {
-          this.toastr.success('Iniciativa registrada en el WF', '¡Éxito!');
-          this.formSubmitted.emit();
+    this.cargandoToast = this.toastr.info('Espere por favor...', 'Cargando!', {
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      progressBar: true,
+      timeOut: 0,
+      extendedTimeOut: 0
+    });
 
-          this.router.navigate(['/pantalla-intermedia-producto']);
-        },
-        (error) => {
-          console.error('Error al crear tarea en Jira:', error);
-          this.toastr.error('Error al registrar la iniciativa', 'Error');
-        }
-      );
-    }, 3000);
+    this.jiraService.crearEpicEnJira(this.nuevaIniciativa).subscribe(
+      (response) => {
+        this.toastr.clear();
+        this.toastr.success('Iniciativa registrada en el WF', '¡Éxito!');
+        this.formSubmitted.emit();
+        this.router.navigate(['/pantalla-intermedia-producto']);
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        console.error('Error al crear tarea en Jira:', error);
+        this.toastr.error('Error al registrar la iniciativa', 'Error');
+        this.cdr.detectChanges();
+      }
+    );
   }
 }
