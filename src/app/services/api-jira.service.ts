@@ -11,11 +11,27 @@ export class JiraService {
 
   constructor(private http: HttpClient) {}
 
-  crearIssueEnJira(
+  crearEpicEnJira(formulario: any): Observable<any> {
+    const payload = {
+      formulario
+        };
+
+    return this.http.post(`${this.jiraApiUrl}/createEpic`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear Epic en Jira:', error);
+        throw error;
+      })
+    );
+  }
+
+
+
+  crearRiskEnJira(
     nombre: string,
     descripcion: string,
     issueTypeId: string,
-    epicId?: string  ): Observable<any> {
+    epicId?: string
+  ): Observable<any> {
     const payload = {
       summary: nombre,
       description: descripcion,
@@ -23,9 +39,9 @@ export class JiraService {
       epicId: epicId,
     };
 
-    return this.http.post(this.jiraApiUrl, payload).pipe(
+    return this.http.post(`${this.jiraApiUrl}/createRisk`, payload).pipe(
       catchError((error) => {
-        console.error('Error al crear issue en Jira:', error);
+        console.error('Error al crear Risk en Jira:', error);
         throw error;
       })
     );

@@ -85,7 +85,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
       console.log('EpicId encontrado:', epicId);
 
-      this.jiraService.crearIssueEnJira(
+      this.jiraService.crearRiskEnJira(
         tituloConPrefijo,
         riesgo.descripcion,
         '10038',

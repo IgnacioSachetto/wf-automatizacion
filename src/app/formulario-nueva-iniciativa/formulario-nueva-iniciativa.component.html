@@ -9,7 +9,38 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="text" id="nombre" required [(ngModel)]="nombreProducto" name="nombreProducto">
+        <input type="text" id="nombre" required [(ngModel)]="nuevaIniciativa.nombreProducto" name="nombreProducto">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="vertical">Vertical
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona la vertical a la que perteneces.</span>
+        </div>
+      </label>
+      <div class="select-container">
+        <select id="vertical" class="form-control" [(ngModel)]="nuevaIniciativa.vertical" name="vertical">
+          <option value="" disabled selected>Seleccione una</option>
+            <option value="clienteEco">Cliente Ecosistémico & APP</option>
+            <option value="homeSuscripciones">Home & Suscripciones</option>
+            <option value="comercios">Comercios</option>
+            <option value="consumersAlianzas">Consumers & Alianzas/ Merchants</option>
+            <option value="creditos">Créditos</option>
+            <option value="cuentasInversiones">Cuentas, Inversiones y Pagos</option>
+            <option value="tarjetas">Tarjetas</option>
+            <option value="segurosAsistencias">Seguros y Asistencias</option>
+            <option value="cx">CX</option>
+            <option value="finanzas">Finanzas</option>
+            <option value="legales">Legales</option>
+            <option value="marketing">Marketing</option>
+            <option value="riesgos">Riesgos</option>
+            <option value="soporteRRHH">Soporte - RRHH</option>
+            <option value="tisiGestionCambios">TI/SI - Gestión de Cambios</option>
+            <option value="tisiGestionOperaciones">TI/SI - Gestión de las Operaciones</option>
+            <option value="gestionAccesos">Gestión de accesos Lógicos y Físicos</option>
+          </select>
       </div>
     </div>
 
@@ -21,7 +52,7 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="email" id="email" placeholder="Correo electrónico Referente" required>
+        <input type="email" id="email" placeholder="Correo electrónico Referente"  [(ngModel)] = "nuevaIniciativa.nombreReferenteProducto" name="nombreReferenteProducto" required>
       </div>
     </div>
 
@@ -33,7 +64,7 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="email" id="referenteUX" placeholder="Correo electrónico Referente UX">
+        <input type="email" id="referenteUX" [(ngModel)]="nuevaIniciativa.referenteUX" name="nombreReferenteUX" placeholder="Correo electrónico Referente UX">
       </div>
     </div>
 
@@ -45,7 +76,7 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="email" id="referenteIT" placeholder="Correo electrónico Referente IT">
+        <input type="email" id="referenteIT"  [(ngModel)]="nuevaIniciativa.referenteIT" name="nombreReferenteIT"  placeholder="Correo electrónico Referente IT">
       </div>
     </div>
 
@@ -57,9 +88,12 @@
         </div>
       </label>
       <div class="select-container">
-        <select id="compañia" class="form-control">
-          <option value="tn">TN</option>
-          <option value="nd">ND</option>
+        <select id="compañia" class="form-control"  [(ngModel)]="nuevaIniciativa.compania" name="compania" >
+          <option value="" disabled selected>Seleccione una</option>
+          <option value="TN">TN</option>
+          <option value="ND">ND</option>
+          <option value="NX">NX</option>
+
         </select>
       </div>
     </div>
@@ -72,7 +106,7 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="date" id="fecha" class="form-control">
+        <input type="date" id="fecha" class="form-control"  [(ngModel)]="nuevaIniciativa.fechaEstimadaImplementacion" name="fechaEstimadaImplementacion">
       </div>
     </div>
 
@@ -84,7 +118,7 @@
         </div>
       </label>
       <div class="input-container">
-        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="descripcionProducto" name="descripcionProducto"></textarea>
+        <textarea id="text-area" rows="6" placeholder="Descripción del Producto o enlace a la documentación..." [(ngModel)]="nuevaIniciativa.descripcionProducto" name="descripcionProducto"></textarea>
       </div>
     </div>
 

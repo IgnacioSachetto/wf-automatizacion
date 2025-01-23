@@ -11,8 +11,18 @@ import { JiraService } from '../services/api-jira.service';
 export class FormularioIniciativaComponent {
   @Output() formSubmitted = new EventEmitter<void>();
 
-  nombreProducto: string = '';
-  descripcionProducto: string = '';
+  nuevaIniciativa = {
+    nombreProducto: '',
+    descripcionProducto: '',
+    vertical: '',
+    compañia: '',
+    nombreReferenteProducto: '',
+    referenteUX: '',
+    referenteIT: '',
+    compania: '',
+    fechaEstimadaImplementacion: '',
+    // Agrega aquí todos los demás campos
+  };
 
   constructor(
     private toastr: ToastrService,
@@ -34,7 +44,7 @@ export class FormularioIniciativaComponent {
     this.cdr.detectChanges();
 
     setTimeout(() => {
-      this.jiraService.crearIssueEnJira(this.nombreProducto, this.descripcionProducto, '10039').subscribe(
+      this.jiraService.crearEpicEnJira(this.nuevaIniciativa).subscribe(
         (response) => {
           this.toastr.success('Iniciativa registrada en el WF', '¡Éxito!');
           this.formSubmitted.emit();
