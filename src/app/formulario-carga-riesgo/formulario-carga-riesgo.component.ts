@@ -89,6 +89,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
         tituloConPrefijo,
         riesgo.descripcion,
         '10038',
+        riesgo.areaSeleccionada,
         epicId
       ).subscribe(
         () => {

@@ -30,13 +30,15 @@ export class JiraService {
     nombre: string,
     descripcion: string,
     issueTypeId: string,
-    epicId?: string
+    areaSeleccionada: string,
+    epicId?: string,
   ): Observable<any> {
     const payload = {
       summary: nombre,
       description: descripcion,
       issueTypeId: issueTypeId,
-      epicId: epicId,
+      areaSeleccionada: areaSeleccionada,
+      epicId: epicId
     };
 
     return this.http.post(`${this.jiraApiUrl}/createRisk`, payload).pipe(
