@@ -112,17 +112,37 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
   agregarRiesgo() {
     if (!this.iniciativaSeleccionada) {
-      this.toastr.error('Debe seleccionar una iniciativa antes de agregar un riesgo.');
-      return;
+        this.toastr.error('Debe seleccionar una iniciativa antes de agregar un riesgo.');
+        return;
+    }
+
+    if (!this.areaSeleccionada || this.areaSeleccionada.trim() === '') {
+        this.toastr.error('Debe seleccionar un área antes de agregar un riesgo.');
+        return;
+    }
+
+    if (!this.tituloRiesgo || this.tituloRiesgo.trim() === '') {
+        this.toastr.error('Debe ingresar un título para el riesgo.');
+        return;
+    }
+
+    if (!this.descripcionRiesgo || this.descripcionRiesgo.trim() === '') {
+        this.toastr.error('Debe ingresar una descripción para el riesgo.');
+        return;
+    }
+
+    if (!this.tipoSeleccionado || this.tipoSeleccionado.trim() === '') {
+        this.toastr.error('Debe seleccionar un tipo de riesgo.');
+        return;
     }
 
     this.riesgosTemporales.push({
-      areaSeleccionada: this.areaSeleccionada,
-      titulo: this.tituloRiesgo,
-      descripcion: this.descripcionRiesgo,
-      iniciativaSeleccionada: this.iniciativaSeleccionada,
-      tipo: this.tipoSeleccionado,
-      editando: false,
+        areaSeleccionada: this.areaSeleccionada,
+        titulo: this.tituloRiesgo,
+        descripcion: this.descripcionRiesgo,
+        iniciativaSeleccionada: this.iniciativaSeleccionada,
+        tipo: this.tipoSeleccionado,
+        editando: false,
     });
 
     this.areaSeleccionada = '';
@@ -132,12 +152,13 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.iniciativaSeleccionada = null;
 
     if (this.riesgosTemporales.length > 0) {
-      this.tablaVisible = true;
+        this.tablaVisible = true;
     }
     this.enviarVisible = true;
 
     this.toastr.success('Riesgo agregado correctamente!');
-  }
+}
+
 
   editarCampo(riesgo: any) {
     riesgo.original = {
