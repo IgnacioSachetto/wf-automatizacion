@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
 
@@ -9,6 +9,18 @@ interface Epic {
   summary: string;
   status: string;
 }
+
+interface Iniciativa {
+  summary: string;
+  epicId: string;
+  status: string;
+  taskId?: string;
+  parentSummary?: string;
+  assignee?: string;
+  duedate?: string;
+  urlts?: string;
+}
+
 
 @Component({
   selector: 'app-formulario-carga-riesgo',
@@ -34,16 +46,81 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     editando?: boolean;
   }[] = [];
   revisadoSinRiesgos: boolean = false;
+  iniciativas: Iniciativa[] = [];
+  iniciativaSeleccionadaDesdeRiesgo: Iniciativa | null = null;
+
+
+
 
   constructor(
     private toastr: ToastrService,
     private jiraService: JiraService,
     private router: Router,
+    private route: ActivatedRoute,
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    this.cargarIniciativasDesdeBackend();
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params: { [key: string]: string }) => {
+      const summaryParam = params['iniciativa'];
+
+      this.areaSeleccionada = params['area'] || '';
+
+      this.iniciativaSeleccionada = null;
+
+      this.cargarIniciativasDesdeBackend().then(() => {
+
+        if (this.iniciativasEnCurso && this.iniciativasEnCurso.length > 0) {
+          if (summaryParam) {
+            this.iniciativaSeleccionadaDesdeRiesgo = this.iniciativasEnCurso.find(
+              iniciativa => iniciativa.summary === summaryParam
+            ) || null;
+
+            if (this.iniciativaSeleccionadaDesdeRiesgo) {
+              console.log('Iniciativa seleccionada:', this.iniciativaSeleccionadaDesdeRiesgo);
+              this.iniciativaSeleccionada = this.iniciativaSeleccionadaDesdeRiesgo;
+            } else {
+              console.log('No se encontró la iniciativa con el summary:', summaryParam);
+            }
+          } else {
+            console.log('No se pasó un parámetro de iniciativa, el select quedará vacío.');
+          }
+        } else {
+          console.log('Las iniciativas aún no están cargadas.');
+        }
+      });
+    });
+  }
+
+
+  cargarIniciativasDesdeBackend(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicInProgress').subscribe(
+        (response) => {
+          const epicas = response.data || [];
+          this.iniciativasEnCurso = epicas.map(epic => ({
+            epicId: epic.epicId,
+            summary: epic.summary,
+            status: epic.status
+          }));
+
+          resolve();
+        },
+        (error) => {
+          this.toastr.error('Hubo un error al cargar las iniciativas en curso');
+          console.error('Error al cargar iniciativas:', error);
+          reject();
+        }
+      );
+    });
+  }
+
+
+
+
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 
   isVisible: boolean = false;
@@ -54,28 +131,12 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.isVisibleEnviar = !this.isVisibleEnviar;
   }
 
-  cargarIniciativasDesdeBackend() {
-    this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicInProgress').subscribe(
-      (response) => {
-        const epicas = response.data || [];
-        this.iniciativasEnCurso = epicas.map(epic => ({
-          epicId: epic.epicId,
-          summary: epic.summary,
-          status: epic.status
-        }));
-      },
-      (error) => {
-        this.toastr.error('Hubo un error al cargar las iniciativas en curso');
-        console.error('Error al cargar iniciativas:', error);
-      }
-    );
-  }
+
 
   seleccionarIniciativa(epicId: string) {
     const iniciativa = this.iniciativasEnCurso.find(inc => inc.epicId === epicId);
     if (iniciativa) {
       this.iniciativaSeleccionada = iniciativa;
-      console.log('Iniciativa seleccionada:', this.iniciativaSeleccionada);
     }
   }
 
@@ -83,8 +144,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
   enviarFormulario(event: Event) {
     event.preventDefault();
-    console.log(this.revisadoSinRiesgos);
-    console.log(this.riesgosTemporales.length);
+
 
     if (this.revisadoSinRiesgos === false && this.riesgosTemporales.length === 0) {
       if (!this.iniciativaSeleccionada) {
@@ -97,7 +157,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
         return;
       }
 
-      console.log("entre");
 
       this.enviarDatosSinRiesgos();
     } else if (this.riesgosTemporales.length > 0) {
@@ -110,13 +169,11 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === this.iniciativaSeleccionada?.summary);
     const epicId = epic ? epic.epicId : '';
 
-    console.log("mi epc es " + epicId);
     if (!epicId) {
         this.toastr.error('No se encontró un EpicId correspondiente.', 'Error');
         return;
     }
 
-    console.log('Enviando datos sin riesgos...');
     this.jiraService.iniciativaSinRiesgosPorArea(this.areaSeleccionada, epicId).subscribe(
         () => {
             this.toastr.success("Sin riesgos levantado por el area", 'Éxito');
@@ -143,8 +200,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === riesgo.iniciativaSeleccionada?.summary);
       const epicId = epic ? epic.epicId : '';
 
-      console.log('EpicId encontrado:', epicId);
-
       this.jiraService.crearRiskEnJira(
         tituloConPrefijo,
         riesgo.descripcion,
@@ -159,7 +214,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
           }, 2000);
         },
         (error) => {
-          console.log('Error al crear issue en Jira:', error);
           this.toastr.error('No se pudo registrar el elemento.', 'Error');
         }
       );
@@ -232,13 +286,14 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   guardarCampo(riesgo: any, index: number) {
     riesgo.editando = false;
     this.riesgosTemporales[index] = { ...riesgo };
-    console.log('Riesgo actualizado', this.riesgosTemporales[index]);
   }
 
   eliminarRiesgo(index: number) {
     this.riesgosTemporales.splice(index, 1);
+
     if (this.riesgosTemporales.length === 0) {
       this.tablaVisible = false;
+      this.isVisibleEnviar = false;
     }
   }
 

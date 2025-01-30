@@ -1,35 +1,144 @@
-html, body {
-  overflow-x: hidden;
-}
-
 .form-container {
-  flex: 1;
-  padding: 1rem;
-  max-width: 75vw;
-  width: 80vw;
+  padding: 20px;
+  max-width: 90%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
   box-sizing: border-box;
-  overflow-x: hidden;
-  margin-top: 3%;
 }
 
 h2 {
-  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
+.table-container {
+  width: 100%;
+  margin-top: 20px;
 }
 
-.form-group label {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.table a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.no-data-message {
+  color: #888;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.styled-table th {
+  background-color: #f4f4f4;
   color: #333;
+  font-weight: bold;
+}
+
+.styled-table td {
+  background-color: #fff;
+  color: #333;
+}
+
+.styled-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.styled-table button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.styled-table button:hover {
+  background-color: #45a049;
+}
+
+.styled-table .input-sin-borde {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  padding: 5px;
+}
+
+.styled-table select.input-sin-borde {
+  width: 100%;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.styled-table .input-sin-borde:focus {
+  outline: none;
+}
+
+.styled-table .info-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+
+.styled-table .custom-tooltip {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.styled-table .info-icon-container:hover .custom-tooltip {
+  display: block;
 }
 
 .form-group input,
@@ -95,7 +204,7 @@ button[type="submit"], .agregar-riesgos {
 }
 
 .nav-btn-form.btn-filled, .agregar-riesgos {
-  background-color: #028A0F;
+  background-color: #50007f;
   color: white;
   padding: 10px;
   border: none;
@@ -104,13 +213,12 @@ button[type="submit"], .agregar-riesgos {
   font-size: 16px;
   border-radius: 14px;
   font-weight: bold;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-btn-form.btn-filled:hover {
-  background-color: #04C42C;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #4a148c;
 }
+
 button[type="submit"], .agregar-riesgos {
   display: block;
   width: 50%;
@@ -215,27 +323,4 @@ label {
 
 input[type="checkbox"] {
   margin-right: 10px;
-}
-
-.visualizar-riesgos {
-  background-color: #5a00b5;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 14px;
-  transition: box-shadow 0.3s ease;
-  display: block;
-  width: 50%;
-  margin: auto;
-  margin-top: 20px;
-  height: 50px;
-}
-
-.visualizar-riesgos:hover {
-  background-color: #8000ff;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }

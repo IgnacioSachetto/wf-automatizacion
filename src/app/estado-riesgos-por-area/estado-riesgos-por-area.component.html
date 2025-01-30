@@ -1,0 +1,67 @@
+<div class="form-container">
+  <h2>Riesgos Pendientes por Área</h2>
+
+  <div class="form-group">
+    <label for="area-form">
+      Seleccione su área:
+      <div class="info-icon-container">
+        <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+        <span class="custom-tooltip">Selecciona el área a la que pertenece.</span>
+      </div>
+    </label>
+    <div class="select-container">
+      <select
+        id="area"
+        name="area"
+        class="form-control"
+        [(ngModel)]="areaSeleccionada"
+        (ngModelChange)="cargarIniciativas()">
+        <option value="" disabled selected>Seleccione una</option>
+        <option value="Riesgo IT & OP">Riesgo IT & OP</option>
+        <option value="Prevención de Fraudes">Prevención de Fraudes</option>
+        <option value="Legales & Compliance">Legales & Compliance</option>
+        <option value="Contabilidad">Contabilidad</option>
+        <option value="Planning">Planning</option>
+        <option value="Impuestos">Impuestos</option>
+        <option value="Ciberseguridad">Ciberseguridad</option>
+        <option value="Data">Data</option>
+        <option value="Operaciones">Operaciones</option>
+        <option value="Experiencia">Experiencia</option>
+        <option value="ALM & Finanzas Corporativa">ALM & Finanzas Corporativa</option>
+        <option value="PLAFT">PLAFT</option>
+        <option value="Marketing">Marketing</option>
+        <option value="area-select">Otro...</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="iniciativas.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Área</th>
+          <th>Iniciativa</th>
+          <th>Referente</th>
+          <th>Estado</th>
+          <th>Link de Jira</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let iniciativa of iniciativas" [class.selected]="iniciativa.summary === iniciativaSeleccionadaDesdeRiesgo?.summary">
+          <td>{{ iniciativa.summary }}</td>
+          <td>{{ iniciativa.parentSummary || 'No disponible' }}</td>
+          <td>{{ iniciativa.assignee || 'No asignado' }}</td>
+          <td>{{ iniciativa.status || 'No asignado' }}</td>
+
+          <td>
+            <a (click)="navigateToFormularioCargaRiesgos(iniciativa.parentSummary, areaSeleccionada)">Ver en Jira</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="areaSeleccionada && iniciativas.length === 0" class="no-data-message">
+    Riesgos cargados en todas las iniciativas.
+  </div>
+</div>

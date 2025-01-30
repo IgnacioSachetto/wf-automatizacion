@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EstadoRiesgosPorAreaComponent } from './estado-riesgos-por-area/estado-riesgos-por-area.component';
 import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
 import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/formulario-nueva-iniciativa.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'formulario-carga-riesgo', component: FormularioCargaRiesgoComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent},
   { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent},
+  { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent},
 
   { path: '', redirectTo: '', pathMatch: 'full' },
 ];

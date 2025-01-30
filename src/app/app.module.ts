@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
+import { EstadoRiesgosPorAreaComponent } from './estado-riesgos-por-area/estado-riesgos-por-area.component';
 import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
 import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
 import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
   { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent },
+  { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent },
 
   { path: '*', redirectTo: '' }
 ];
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     FormularioCargaRiesgoIaComponent,
     FormularioNuevaIniciativaIaComponent,
     IniciativasEnCursoComponent,
+    EstadoRiesgosPorAreaComponent
   ],
   imports: [
     BrowserModule,
