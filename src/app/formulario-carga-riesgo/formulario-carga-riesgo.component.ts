@@ -145,6 +145,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   enviarFormulario(event: Event) {
     event.preventDefault();
 
+    this.toastr.info('Cargando iniciativas...', 'Información', { timeOut: 1500 });
 
     if (this.revisadoSinRiesgos === false && this.riesgosTemporales.length === 0) {
       if (!this.iniciativaSeleccionada) {
