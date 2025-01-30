@@ -201,3 +201,17 @@ input[type="text"]:focus, textarea:focus {
   outline: none;
   box-shadow: none;
 }
+
+fieldset {
+  border: none;
+}
+
+label {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}

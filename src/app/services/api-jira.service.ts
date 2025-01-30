@@ -48,4 +48,20 @@ export class JiraService {
       })
     );
   }
+
+
+iniciativaSinRiesgosPorArea(areaSeleccionada: string, epicId?: string): Observable<any> {
+  console.log("llegue al serivce")
+  const payload = {
+    areaSeleccionada: areaSeleccionada,
+    epicId: epicId
+  };
+
+  return this.http.post(`${this.jiraApiUrl}/iniciativaSinRiesgosPorArea`, payload).pipe(
+    catchError((error) => {
+      console.error('Error al verificar iniciativa sin riesgos:', error);
+      throw error;
+    })
+  );
+}
 }

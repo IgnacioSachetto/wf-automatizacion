@@ -7,6 +7,7 @@ import { JiraService } from '../services/api-jira.service';
 interface Epic {
   epicId: string;
   summary: string;
+  status: string;
 }
 
 @Component({
@@ -22,17 +23,17 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   tituloRiesgo: string = '';
   descripcionRiesgo: string = '';
   tipoSeleccionado: string = '';
-  iniciativaSeleccionada: { summary: string; epicId: string } | null = null;
-  iniciativasEnCurso: { summary: string, epicId: string }[] = [];
-
+  iniciativaSeleccionada: { summary: string; epicId: string, status: string } | null = null;
+  iniciativasEnCurso: { summary: string, epicId: string, status: string }[] = [];
   riesgosTemporales: {
     areaSeleccionada: string;
     titulo: string;
     descripcion: string;
-    iniciativaSeleccionada: { summary: string; epicId: string } | null;
+    iniciativaSeleccionada: { summary: string; epicId: string, status: string } | null;
     tipo: string;
     editando?: boolean;
   }[] = [];
+  revisadoSinRiesgos: boolean = false;
 
   constructor(
     private toastr: ToastrService,
@@ -45,14 +46,22 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.cargarIniciativasDesdeBackend();
   }
 
+  isVisible: boolean = false;
+  isVisibleEnviar: boolean = false;
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+    this.isVisibleEnviar = !this.isVisibleEnviar;
+  }
+
   cargarIniciativasDesdeBackend() {
     this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicInProgress').subscribe(
       (response) => {
         const epicas = response.data || [];
-
         this.iniciativasEnCurso = epicas.map(epic => ({
           epicId: epic.epicId,
-          summary: epic.summary
+          summary: epic.summary,
+          status: epic.status
         }));
       },
       (error) => {
@@ -70,6 +79,58 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     }
   }
 
+
+
+  enviarFormulario(event: Event) {
+    event.preventDefault();
+    console.log(this.revisadoSinRiesgos);
+    console.log(this.riesgosTemporales.length);
+
+    if (this.revisadoSinRiesgos === false && this.riesgosTemporales.length === 0) {
+      if (!this.iniciativaSeleccionada) {
+        this.toastr.error('Debe seleccionar una iniciativa antes de continuar.');
+        return;
+      }
+
+      if (!this.areaSeleccionada || this.areaSeleccionada.trim() === '') {
+        this.toastr.error('Debe seleccionar un área antes de continuar.');
+        return;
+      }
+
+      console.log("entre");
+
+      this.enviarDatosSinRiesgos();
+    } else if (this.riesgosTemporales.length > 0) {
+      this.finalizarCargaRiesgos();
+    }
+  }
+
+
+  enviarDatosSinRiesgos() {
+    const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === this.iniciativaSeleccionada?.summary);
+    const epicId = epic ? epic.epicId : '';
+
+    console.log("mi epc es " + epicId);
+    if (!epicId) {
+        this.toastr.error('No se encontró un EpicId correspondiente.', 'Error');
+        return;
+    }
+
+    console.log('Enviando datos sin riesgos...');
+    this.jiraService.iniciativaSinRiesgosPorArea(this.areaSeleccionada, epicId).subscribe(
+        () => {
+            this.toastr.success("Sin riesgos levantado por el area", 'Éxito');
+            setTimeout(() => {
+              this.router.navigate(['/pantalla-intermedia-producto']);
+            }, 2000);        },
+        (error) => {
+            console.error('Error al enviar datos sin riesgos:', error);
+            this.toastr.error('Hubo un problema al enviar los datos sin riesgos.', 'Error');
+        }
+    );
+}
+
+
   finalizarCargaRiesgos() {
     if (this.riesgosTemporales.length === 0) {
       this.toastr.error('No hay elementos para cargar.', 'Error');
@@ -79,7 +140,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.riesgosTemporales.forEach(riesgo => {
       const prefijo = riesgo.tipo === 'riesgo' ? '[RIESGO]' : '[RECOMENDACIÓN]';
       const tituloConPrefijo = `${prefijo} ${riesgo.titulo}`;
-
       const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === riesgo.iniciativaSeleccionada?.summary);
       const epicId = epic ? epic.epicId : '';
 
@@ -109,40 +169,39 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.formSubmitted.emit();
   }
 
-
   agregarRiesgo() {
     if (!this.iniciativaSeleccionada) {
-        this.toastr.error('Debe seleccionar una iniciativa antes de agregar un riesgo.');
-        return;
+      this.toastr.error('Debe seleccionar una iniciativa antes de agregar un riesgo.');
+      return;
     }
 
     if (!this.areaSeleccionada || this.areaSeleccionada.trim() === '') {
-        this.toastr.error('Debe seleccionar un área antes de agregar un riesgo.');
-        return;
+      this.toastr.error('Debe seleccionar un área antes de agregar un riesgo.');
+      return;
     }
 
     if (!this.tituloRiesgo || this.tituloRiesgo.trim() === '') {
-        this.toastr.error('Debe ingresar un título para el riesgo.');
-        return;
+      this.toastr.error('Debe ingresar un título para el riesgo.');
+      return;
     }
 
     if (!this.descripcionRiesgo || this.descripcionRiesgo.trim() === '') {
-        this.toastr.error('Debe ingresar una descripción para el riesgo.');
-        return;
+      this.toastr.error('Debe ingresar una descripción para el riesgo.');
+      return;
     }
 
     if (!this.tipoSeleccionado || this.tipoSeleccionado.trim() === '') {
-        this.toastr.error('Debe seleccionar un tipo de riesgo.');
-        return;
+      this.toastr.error('Debe seleccionar un tipo de riesgo.');
+      return;
     }
 
     this.riesgosTemporales.push({
-        areaSeleccionada: this.areaSeleccionada,
-        titulo: this.tituloRiesgo,
-        descripcion: this.descripcionRiesgo,
-        iniciativaSeleccionada: this.iniciativaSeleccionada,
-        tipo: this.tipoSeleccionado,
-        editando: false,
+      areaSeleccionada: this.areaSeleccionada,
+      titulo: this.tituloRiesgo,
+      descripcion: this.descripcionRiesgo,
+      iniciativaSeleccionada: this.iniciativaSeleccionada,
+      tipo: this.tipoSeleccionado,
+      editando: false,
     });
 
     this.areaSeleccionada = '';
@@ -152,13 +211,12 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.iniciativaSeleccionada = null;
 
     if (this.riesgosTemporales.length > 0) {
-        this.tablaVisible = true;
+      this.tablaVisible = true;
     }
-    this.enviarVisible = true;
+    this.isVisibleEnviar = true;
 
     this.toastr.success('Riesgo agregado correctamente!');
-}
-
+  }
 
   editarCampo(riesgo: any) {
     riesgo.original = {
@@ -191,10 +249,5 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     riesgo.areaSeleccionada = riesgo.original.areaSeleccionada;
 
     riesgo.editando = false;
-  }
-
-  enviarFormulario(event: Event) {
-    event.preventDefault();
-    this.finalizarCargaRiesgos();
   }
 }
