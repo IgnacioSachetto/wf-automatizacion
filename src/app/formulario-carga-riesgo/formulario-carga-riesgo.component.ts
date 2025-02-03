@@ -21,7 +21,6 @@ interface Iniciativa {
   urlts?: string;
 }
 
-
 @Component({
   selector: 'app-formulario-carga-riesgo',
   templateUrl: './formulario-carga-riesgo.component.html',
@@ -37,6 +36,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   tipoSeleccionado: string = '';
   iniciativaSeleccionada: { summary: string; epicId: string, status: string } | null = null;
   iniciativasEnCurso: { summary: string, epicId: string, status: string }[] = [];
+  iniciativasCanalContable: { epicId: string }[] = [];
   riesgosTemporales: {
     areaSeleccionada: string;
     titulo: string;
@@ -48,10 +48,9 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   revisadoSinRiesgos: boolean = false;
   iniciativas: Iniciativa[] = [];
   iniciativaSeleccionadaDesdeRiesgo: Iniciativa | null = null;
-
-
-
-
+  epicConCanalContable: string[] = [];
+  mensajeAlerta: string = '';
+  tipoAlerta: string = '';
   constructor(
     private toastr: ToastrService,
     private jiraService: JiraService,
@@ -61,6 +60,8 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.obtenerEpicasConCanalContable();
+
     this.route.queryParams.subscribe((params: { [key: string]: string }) => {
       const summaryParam = params['iniciativa'];
 
@@ -69,7 +70,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       this.iniciativaSeleccionada = null;
 
       this.cargarIniciativasDesdeBackend().then(() => {
-
         if (this.iniciativasEnCurso && this.iniciativasEnCurso.length > 0) {
           if (summaryParam) {
             this.iniciativaSeleccionadaDesdeRiesgo = this.iniciativasEnCurso.find(
@@ -79,6 +79,11 @@ export class FormularioCargaRiesgoComponent implements OnInit {
             if (this.iniciativaSeleccionadaDesdeRiesgo) {
               console.log('Iniciativa seleccionada:', this.iniciativaSeleccionadaDesdeRiesgo);
               this.iniciativaSeleccionada = this.iniciativaSeleccionadaDesdeRiesgo;
+
+              if (this.iniciativasEnCurso.some(iniciativa => iniciativa.epicId === this.iniciativaSeleccionada?.epicId)) {
+                this.toastr.info('¡Has seleccionado una iniciativa en curso!', 'Información');
+              }
+
             } else {
               console.log('No se encontró la iniciativa con el summary:', summaryParam);
             }
@@ -91,6 +96,33 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       });
     });
   }
+
+
+
+  obtenerEpicasConCanalContable(): void {
+    this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicWithCanalContable')
+      .subscribe(
+        (response) => {
+          const epicas = response.data || [];
+          this.iniciativasCanalContable = epicas.map(epic => ({ epicId: epic.epicId }));
+          console.log('Epicas con canal contable:', this.iniciativasCanalContable);
+        },
+        (error) => {
+          this.toastr.error('Hubo un error al cargar las iniciativas con canal contable');
+          console.error('Error al cargar iniciativas:', error);
+        }
+      );
+  }
+
+  onIniciativaSeleccionada(): void {
+    const tieneCanalContable = this.iniciativasCanalContable.some(epic => epic.epicId === this.iniciativaSeleccionada!.epicId);
+
+    if (tieneCanalContable) {
+      this.mensajeAlerta = 'Este riesgo corresponde a una iniciativa que necesita canal contable. No se procederá con la creación hasta que se mitigue.';
+    }
+  }
+
+
 
 
   cargarIniciativasDesdeBackend(): Promise<void> {
@@ -114,7 +146,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       );
     });
   }
-
 
 
 

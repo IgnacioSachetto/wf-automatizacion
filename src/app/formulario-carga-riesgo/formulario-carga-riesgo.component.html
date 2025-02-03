@@ -1,10 +1,13 @@
 <div class="form-container">
   <h2>Carga de Riesgos - Solo Referentes</h2>
   <form (ngSubmit)="enviarFormulario($event)">
-    <!-- Iniciativa en Curso -->
+    <div *ngIf="mensajeAlerta" class="canal-message" [ngClass]="{'alert-success': tipoAlerta === 'success', 'alert-warning': tipoAlerta === 'warning'}">
+      {{ mensajeAlerta }}
+    </div>
+
     <div class="form-group">
       <label for="iniciativa">Iniciativa en Curso</label>
-      <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa" >
+      <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa" (ngModelChange)="onIniciativaSeleccionada()">
         <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
           {{ iniciativa.epicId }} - {{ iniciativa.summary }} - ( {{iniciativa.status}} )
         </option>

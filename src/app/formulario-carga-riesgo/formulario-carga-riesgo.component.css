@@ -321,3 +321,15 @@ input[type="checkbox"] {
 .table-container td button:nth-child(4):hover {
   background-color: #b02a37;
 }
+
+.canal-message {
+  color: #8E6A3A ;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #FFF3CD;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #8E6A3A ;
+}
