@@ -336,3 +336,71 @@ input[type="checkbox"] {
   text-decoration: underline;
   color: #0056b3;
 }
+
+/* Estilo para el botón dentro de la tabla */
+.table-container .table td a.jira-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.table-container .table td a.jira-link:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.table-container .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button-container .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-container .btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.table-container .table th {
+  background-color: #50007f;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-weight: bold;
+  border-bottom: 3px solid #f4a019;
+}
+
+.table-container .table td {
+  text-align: center;
+
+  vertical-align: middle;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+
+}
+
+.table-container .table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}

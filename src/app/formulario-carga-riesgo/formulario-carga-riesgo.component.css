@@ -1,7 +1,3 @@
-html, body {
-  overflow-x: hidden;
-}
-
 .form-container {
   flex: 1;
   padding: 1rem;
@@ -11,7 +7,6 @@ html, body {
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
-  overflow-x: hidden;
   margin-top: 3%;
 }
 
@@ -111,6 +106,7 @@ button[type="submit"], .agregar-riesgos {
   background-color: #04C42C;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 button[type="submit"], .agregar-riesgos {
   display: block;
   width: 50%;
@@ -138,15 +134,19 @@ button[type="submit"], .agregar-riesgos {
 }
 
 .table-container {
-  overflow-x: hidden;
   width: 100%;
+  overflow: hidden;  /* Sin overflow para que no se haga scroll */
+  margin-top: 20px;
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  table-layout: fixed;
+  width: 100%; /* Asegura que la tabla ocupe el 100% del ancho */
+  table-layout: fixed;  /* Las celdas tendrán un ancho fijo */
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .table th,
@@ -160,12 +160,21 @@ button[type="submit"], .agregar-riesgos {
 }
 
 .table th {
-  background-color: #f8f9fa;
+  background-color: #50007f;
   color: #333;
+}
+
+.table td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
 }
 
 .table td:nth-child(2) {
   max-width: 200px;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 button {
@@ -238,4 +247,77 @@ input[type="checkbox"] {
 .visualizar-riesgos:hover {
   background-color: #8000ff;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.table thead th {
+  background-color: #50007f;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-container .table th {
+  background-color: #50007f;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-weight: bold;
+  border-bottom: 3px solid #f4a019;
+}
+
+.table-container .table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-container .table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table-container td button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2px;
+}
+
+.table-container td button:nth-child(1) {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-container td button:nth-child(1):hover {
+  background-color: #0056b3;
+}
+
+.table-container td button:nth-child(2) {
+  background-color: #28a745;
+  color: white;
+}
+
+.table-container td button:nth-child(2):hover {
+  background-color: #1e7e34;
+}
+
+.table-container td button:nth-child(3) {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.table-container td button:nth-child(3):hover {
+  background-color: #e0a800;
+}
+
+/* Botón Eliminar */
+.table-container td button:nth-child(4) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.table-container td button:nth-child(4):hover {
+  background-color: #b02a37;
 }

@@ -225,6 +225,16 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   }
 
   agregarRiesgo() {
+    const riesgosMismaIniciativaYArea = this.riesgosTemporales.filter(riesgo =>
+      riesgo.iniciativaSeleccionada?.epicId === this.iniciativaSeleccionada?.epicId &&
+      riesgo.areaSeleccionada === this.areaSeleccionada
+    );
+
+    if (riesgosMismaIniciativaYArea.length >= 2) {
+      this.toastr.warning('No puedes agregar más de 2 riesgos para la misma iniciativa y área.');
+      return;
+    }
+
     if (!this.iniciativaSeleccionada) {
       this.toastr.error('Debe seleccionar una iniciativa antes de agregar un riesgo.');
       return;

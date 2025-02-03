@@ -168,3 +168,21 @@ button[type="submit"] {
 .nav-btn-form.btn-filled:hover {
   background-color: #4a148c;
 }
+
+fieldset {
+  border: none;
+}
+
+label {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#canal-contable {
+  margin-left: 10px;
+}

@@ -43,7 +43,7 @@
           <th>Iniciativa</th>
           <th>Referente</th>
           <th>Estado</th>
-          <th>Link de Jira</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -54,7 +54,7 @@
           <td>{{ iniciativa.status || 'No asignado' }}</td>
 
           <td>
-            <a (click)="navigateToFormularioCargaRiesgos(iniciativa.parentSummary, areaSeleccionada)" class="jira-link">Ver en Jira</a>
+            <a (click)="navigateToFormularioCargaRiesgos(iniciativa.parentSummary, areaSeleccionada)" class="jira-link">Cargar Riesgos</a>
           </td>
         </tr>
       </tbody>
@@ -63,5 +63,11 @@
 
   <div *ngIf="areaSeleccionada && iniciativas.length === 0" class="no-data-message">
     Riesgos cargados en todas las iniciativas.
+  </div>
+
+  <div class="button-container">
+    <button (click)="navigateToFormularioCargaRiesgosGeneral(null, areaSeleccionada)" class="btn btn-primary">
+      Cargar riesgos en otra iniciativa
+    </button>
   </div>
 </div>

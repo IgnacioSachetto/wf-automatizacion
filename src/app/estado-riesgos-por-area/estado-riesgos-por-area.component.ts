@@ -40,6 +40,13 @@ export class EstadoRiesgosPorAreaComponent  {
     });
   }
 
+  navigateToFormularioCargaRiesgosGeneral(parentSummary: string | null, area: string): void {
+
+    this.router.navigate(['/formulario-carga-riesgos'], {
+      queryParams: { area: area }
+    });
+  }
+
   cargarIniciativas() {
     this.toastr.info('Cargando Riesgos Pendientes...', 'Información', { timeOut: 1000 });
 
