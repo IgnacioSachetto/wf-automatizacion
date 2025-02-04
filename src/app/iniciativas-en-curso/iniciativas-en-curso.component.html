@@ -1,7 +1,5 @@
 <div class="form-container">
   <h2>Iniciativas en Curso</h2>
-
-  <!-- Tabla con las Iniciativas -->
   <div class="table-container" *ngIf="iniciativas.length > 0">
     <table class="table">
       <thead>
@@ -17,14 +15,12 @@
           <td>{{ iniciativa.epicId }} - {{ iniciativa.summary }}</td>
           <td>{{ iniciativa.duedate || 'No disponible' }}</td>
           <td>{{ iniciativa.assignee || 'No asignado' }}</td>
-          <!-- Agregar el enlace a la URL de la épica -->
           <td><a [href]="iniciativa.url" target="_blank">Ver en Jira</a></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Mensaje si no hay iniciativas -->
   <div *ngIf="iniciativas.length === 0" class="no-data-message">
     No hay iniciativas en curso disponibles.
   </div>
