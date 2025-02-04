@@ -12,7 +12,6 @@ export class ExcelService {
       .then((response) => response.text())
       .then((csvText) => {
         const datos = XLSX.utils.sheet_to_json(XLSX.read(csvText, {type: 'string'}).Sheets['Sheet1'], { header: 1 });
-        console.log('Contenido procesado del Excel:', datos);
         return datos;
       })
       .catch((error) => {

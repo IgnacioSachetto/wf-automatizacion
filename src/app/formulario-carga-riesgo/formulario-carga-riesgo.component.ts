@@ -51,13 +51,17 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   epicConCanalContable: string[] = [];
   mensajeAlerta: string = '';
   tipoAlerta: string = '';
+  areaOtro?: string;
+  isVisibleOtro: boolean = false;
+  areaSecundariaSeleccionada: string = '';
+
   constructor(
     private toastr: ToastrService,
     private jiraService: JiraService,
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.obtenerEpicasConCanalContable();
@@ -77,7 +81,6 @@ export class FormularioCargaRiesgoComponent implements OnInit {
             ) || null;
 
             if (this.iniciativaSeleccionadaDesdeRiesgo) {
-              console.log('Iniciativa seleccionada:', this.iniciativaSeleccionadaDesdeRiesgo);
               this.iniciativaSeleccionada = this.iniciativaSeleccionadaDesdeRiesgo;
 
               if (this.iniciativasEnCurso.some(iniciativa => iniciativa.epicId === this.iniciativaSeleccionada?.epicId)) {
@@ -105,11 +108,9 @@ export class FormularioCargaRiesgoComponent implements OnInit {
         (response) => {
           const epicas = response.data || [];
           this.iniciativasCanalContable = epicas.map(epic => ({ epicId: epic.epicId }));
-          console.log('Epicas con canal contable:', this.iniciativasCanalContable);
         },
         (error) => {
           this.toastr.error('Hubo un error al cargar las iniciativas con canal contable');
-          console.error('Error al cargar iniciativas:', error);
         }
       );
   }
@@ -178,23 +179,81 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
     this.toastr.info('Cargando iniciativas...', 'Información', { timeOut: 1500 });
 
-    if (this.revisadoSinRiesgos === false && this.riesgosTemporales.length === 0) {
-      if (!this.iniciativaSeleccionada) {
-        this.toastr.error('Debe seleccionar una iniciativa antes de continuar.');
-        return;
-      }
-
-      if (!this.areaSeleccionada || this.areaSeleccionada.trim() === '') {
-        this.toastr.error('Debe seleccionar un área antes de continuar.');
-        return;
-      }
+    this.toastr.info('Cargando iniciativas...', 'Información', { timeOut: 1500 });
 
 
-      this.enviarDatosSinRiesgos();
-    } else if (this.riesgosTemporales.length > 0) {
-      this.finalizarCargaRiesgos();
-    }
+    const crearTareasPromises = this.riesgosTemporales.map(riesgo => {
+      return new Promise<void>((resolve, reject) => {
+
+        if (riesgo.iniciativaSeleccionada?.epicId) {
+
+          const areaSecundaria = this.areaOtro?.trim();
+
+          if (areaSecundaria) {
+            this.http.get<{ message: string; data: string[] }>('http://localhost:3000/jira-api/getTasksInEpic', {
+              params: { epicId: riesgo.iniciativaSeleccionada?.epicId }
+            }).subscribe(
+              (response) => {
+                console.log(`Áreas asociadas a la épica ${riesgo.iniciativaSeleccionada?.epicId}:`, response.data);
+
+                if (response.data.includes(areaSecundaria)) {
+                  console.log(`El área ${areaSecundaria} está en la lista de áreas asociadas a la épica.`);
+                  resolve();
+                } else {
+                  console.log(`El área ${areaSecundaria} NO está en la lista de áreas asociadas a la épica.`);
+
+                  this.jiraService.crearTareaEnJira(areaSecundaria, riesgo.iniciativaSeleccionada?.epicId).subscribe(
+                    () => {
+                      resolve();
+                    },
+                    (error) => {
+                      console.error('Error al enviar datos sin riesgos:', error);
+                      this.toastr.error('Hubo un problema al enviar los datos sin riesgos.', 'Error');
+                      reject(error);
+                    }
+                  );
+                }
+              },
+              (error) => {
+                console.error('Error al obtener tareas de la épica', error);
+                reject(error);
+              }
+            );
+          } else {
+            console.log('Área secundaria no seleccionada o vacía. Saltando la creación de tareas.');
+            resolve();
+          }
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    Promise.all(crearTareasPromises)
+      .then(() => {
+        if (this.revisadoSinRiesgos === false && this.riesgosTemporales.length === 0) {
+          if (!this.iniciativaSeleccionada) {
+            this.toastr.error('Debe seleccionar una iniciativa antes de continuar.');
+            return;
+          }
+
+          if (!this.areaSeleccionada || this.areaSeleccionada.trim() === '') {
+            this.toastr.error('Debe seleccionar un área antes de continuar.');
+            return;
+          }
+
+          this.enviarDatosSinRiesgos();
+        } else if (this.riesgosTemporales.length > 0) {
+          this.finalizarCargaRiesgos();
+        }
+      })
+      .catch((error) => {
+        console.error('Hubo un error al crear las tareas en Jira:', error);
+        this.toastr.error('Hubo un problema al crear las tareas en Jira.', 'Error');
+      });
   }
+
+
 
 
   enviarDatosSinRiesgos() {
@@ -202,22 +261,23 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     const epicId = epic ? epic.epicId : '';
 
     if (!epicId) {
-        this.toastr.error('No se encontró un EpicId correspondiente.', 'Error');
-        return;
+      this.toastr.error('No se encontró un EpicId correspondiente.', 'Error');
+      return;
     }
 
     this.jiraService.iniciativaSinRiesgosPorArea(this.areaSeleccionada, epicId).subscribe(
-        () => {
-            this.toastr.success("Sin riesgos levantado por el area", 'Éxito');
-            setTimeout(() => {
-              this.router.navigate(['/pantalla-intermedia-producto']);
-            }, 2000);        },
-        (error) => {
-            console.error('Error al enviar datos sin riesgos:', error);
-            this.toastr.error('Hubo un problema al enviar los datos sin riesgos.', 'Error');
-        }
+      () => {
+        this.toastr.success("Sin riesgos levantado por el area", 'Éxito');
+        setTimeout(() => {
+          this.router.navigate(['/pantalla-intermedia-producto']);
+        }, 2000);
+      },
+      (error) => {
+        console.error('Error al enviar datos sin riesgos:', error);
+        this.toastr.error('Hubo un problema al enviar los datos sin riesgos.', 'Error');
+      }
     );
-}
+  }
 
 
   finalizarCargaRiesgos() {
@@ -230,6 +290,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       const prefijo = riesgo.tipo === 'riesgo' ? '[RIESGO]' : '[RECOMENDACIÓN]';
       const tituloConPrefijo = `${prefijo} ${riesgo.titulo}`;
       const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === riesgo.iniciativaSeleccionada?.summary);
+
       const epicId = epic ? epic.epicId : '';
 
       this.jiraService.crearRiskEnJira(
@@ -254,6 +315,17 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.riesgosTemporales = [];
     this.formSubmitted.emit();
   }
+
+  onAreaSeleccionada() {
+    if (this.areaSeleccionada === 'area-secundaria') {
+      this.isVisibleOtro = true;
+    } else {
+      this.isVisibleOtro = false;
+      this.areaOtro = '';
+    }
+  }
+
+
 
   agregarRiesgo() {
     const riesgosMismaIniciativaYArea = this.riesgosTemporales.filter(riesgo =>
@@ -291,8 +363,10 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       return;
     }
 
+    const areaParaRiesgo = (this.areaSeleccionada === 'area-secundaria' && this.areaOtro) ? this.areaOtro : this.areaSeleccionada;
+
     this.riesgosTemporales.push({
-      areaSeleccionada: this.areaSeleccionada,
+      areaSeleccionada: areaParaRiesgo,
       titulo: this.tituloRiesgo,
       descripcion: this.descripcionRiesgo,
       iniciativaSeleccionada: this.iniciativaSeleccionada,
@@ -313,6 +387,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
     this.toastr.success('Riesgo agregado correctamente!');
   }
+
 
   editarCampo(riesgo: any) {
     riesgo.original = {

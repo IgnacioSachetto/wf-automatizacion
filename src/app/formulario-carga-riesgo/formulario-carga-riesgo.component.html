@@ -23,7 +23,7 @@
         </div>
       </label>
       <div class="select-container">
-        <select id="area" name="area" class="form-control" [(ngModel)]="areaSeleccionada">
+        <select id="area" name="area" class="form-control" [(ngModel)]="areaSeleccionada" (ngModelChange)="onAreaSeleccionada()">
           <option value="" disabled selected>Seleccione una</option>
           <option value="Riesgo IT & OP">Riesgo IT & OP</option>
           <option value="Prevención de Fraudes">Prevención de Fraudes</option>
@@ -38,10 +38,24 @@
           <option value="ALM & Finanzas Corporativa">ALM & Finanzas Corporativas</option>
           <option value="PLAFT">PLAFT</option>
           <option value="Marketing">Marketing</option>
-          <option value="area-select">Otro...</option>
+          <option value="area-secundaria">Otro...</option>
         </select>
       </div>
     </div>
+
+    <div class="form-group" *ngIf="areaSeleccionada === 'area-secundaria'">
+      <label for="area-otro">Especifica el área:</label>
+      <select id="area-otro" class="form-control" [(ngModel)]="areaOtro" name="areaOtro">
+        <option value="" disabled selected>Seleccionar otra área</option>
+        <option value="Área 1">Área 1</option>
+        <option value="Área 2">Área 2</option>
+        <option value="Área 3">Área 3</option>
+        <option value="Área 4">Área 4</option>
+        <!-- Añade más opciones según lo necesites -->
+      </select>
+    </div>
+
+
 
       <div class="form-group" *ngIf="!isVisible">
         <label for="tituloRiesgo">
@@ -124,7 +138,12 @@
         <tbody>
           <tr *ngFor="let riesgo of riesgosTemporales; let i = index">
             <td>
-              <div *ngIf="!riesgo.editando">{{ riesgo.areaSeleccionada }}</div>
+
+              <div *ngIf="!riesgo.editando">
+                {{ areaSecundariaSeleccionada && areaSecundariaSeleccionada !== 'area-secundaria' ? areaSecundariaSeleccionada : (areaOtro || riesgo.areaSeleccionada) }}
+              </div>
+
+
               <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.areaSeleccionada" class="input-sin-borde" name="areaSeleccionada{{i}}" />
             </td>
             <td>

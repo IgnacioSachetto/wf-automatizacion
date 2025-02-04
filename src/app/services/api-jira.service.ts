@@ -14,7 +14,7 @@ export class JiraService {
   crearEpicEnJira(formulario: any): Observable<any> {
     const payload = {
       formulario
-        };
+    };
 
     return this.http.post(`${this.jiraApiUrl}/createEpic`, payload).pipe(
       catchError((error) => {
@@ -23,8 +23,6 @@ export class JiraService {
       })
     );
   }
-
-
 
   crearRiskEnJira(
     nombre: string,
@@ -49,19 +47,34 @@ export class JiraService {
     );
   }
 
+  iniciativaSinRiesgosPorArea(areaSeleccionada: string, epicId?: string): Observable<any> {
+    const payload = {
+      areaSeleccionada: areaSeleccionada,
+      epicId: epicId
+    };
 
-iniciativaSinRiesgosPorArea(areaSeleccionada: string, epicId?: string): Observable<any> {
-  console.log("llegue al serivce")
-  const payload = {
-    areaSeleccionada: areaSeleccionada,
-    epicId: epicId
-  };
+    return this.http.post(`${this.jiraApiUrl}/iniciativaSinRiesgosPorArea`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al verificar iniciativa sin riesgos:', error);
+        throw error;
+      })
+    );
+  }
 
-  return this.http.post(`${this.jiraApiUrl}/iniciativaSinRiesgosPorArea`, payload).pipe(
-    catchError((error) => {
-      console.error('Error al verificar iniciativa sin riesgos:', error);
-      throw error;
-    })
-  );
-}
+  crearTareaEnJira(
+    areaSecundaria: string,
+    epicId?: string
+  ): Observable<any> {
+    const payload = {
+      areaSecundaria,
+      epicId
+    };
+
+    return this.http.post(`${this.jiraApiUrl}/createTask`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear tarea en Jira:', error);
+        throw error;
+      })
+    );
+  }
 }
