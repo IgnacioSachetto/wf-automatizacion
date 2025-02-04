@@ -82,9 +82,10 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
             if (this.iniciativaSeleccionadaDesdeRiesgo) {
               this.iniciativaSeleccionada = this.iniciativaSeleccionadaDesdeRiesgo;
+              this.onIniciativaSeleccionada();
 
               if (this.iniciativasEnCurso.some(iniciativa => iniciativa.epicId === this.iniciativaSeleccionada?.epicId)) {
-                this.toastr.info('¡Has seleccionado una iniciativa en curso!', 'Información');
+                console.log('Iniciativa cargada automaticamente');
               }
 
             } else {
@@ -177,9 +178,8 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   enviarFormulario(event: Event) {
     event.preventDefault();
 
-    this.toastr.info('Cargando iniciativas...', 'Información', { timeOut: 1500 });
+    this.toastr.info('Registrando Riesgos...', 'Espere', { timeOut: 1500 });
 
-    this.toastr.info('Cargando iniciativas...', 'Información', { timeOut: 1500 });
 
 
     const crearTareasPromises = this.riesgosTemporales.map(riesgo => {
@@ -301,7 +301,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
         epicId
       ).subscribe(
         () => {
-          this.toastr.success('Formulario enviado correctamente!', 'Éxito');
+          this.toastr.success('Riesgo registrado correctamente!', 'Éxito');
           setTimeout(() => {
             this.router.navigate(['/pantalla-intermedia-producto']);
           }, 2000);

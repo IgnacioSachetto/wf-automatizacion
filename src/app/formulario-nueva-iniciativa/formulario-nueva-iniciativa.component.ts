@@ -21,6 +21,7 @@ export class FormularioIniciativaComponent {
     referenteIT: '',
     compania: '',
     fechaEstimadaImplementacion: '',
+    necesitaCanalContable: '',
   };
 
   cargandoToast: any;
