@@ -22,6 +22,7 @@ export class FormularioIniciativaComponent {
     compania: '',
     fechaEstimadaImplementacion: '',
     necesitaCanalContable: '',
+    instanciaDeSalida: '',
   };
 
   cargandoToast: any;
@@ -75,6 +76,11 @@ export class FormularioIniciativaComponent {
 
     if (!this.nuevaIniciativa.fechaEstimadaImplementacion) {
       mensajes.push('La fecha estimada de implementación es obligatoria.');
+      valido = false;
+    }
+
+    if (!this.nuevaIniciativa.instanciaDeSalida.trim()) {
+      mensajes.push('La instancia de salida es obligatoria.');
       valido = false;
     }
 

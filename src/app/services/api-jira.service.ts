@@ -29,6 +29,7 @@ export class JiraService {
     descripcion: string,
     issueTypeId: string,
     areaSeleccionada: string,
+    responsableRiesgo: string,
     epicId?: string,
   ): Observable<any> {
     const payload = {
@@ -36,8 +37,16 @@ export class JiraService {
       description: descripcion,
       issueTypeId: issueTypeId,
       areaSeleccionada: areaSeleccionada,
+      responsableRiesgo: responsableRiesgo,
       epicId: epicId
     };
+
+    if (!nombre || !descripcion || !issueTypeId || !areaSeleccionada || !responsableRiesgo) {
+      console.error('Faltan campos obligatorios');
+      throw new Error('Todos los campos son obligatorios');
+    }
+
+    console.log("este " + JSON.stringify(payload));
 
     return this.http.post(`${this.jiraApiUrl}/createRisk`, payload).pipe(
       catchError((error) => {

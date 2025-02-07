@@ -111,6 +111,24 @@
     </div>
 
     <div class="form-group">
+      <label for="instancia"> Instancia de Salida a Producción
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Seleccione la instancia de salida a producción de su iniciativa.</span>
+        </div>
+      </label>
+      <div class="select-container">
+        <select id="instanciaDeSalida" class="form-control"  [(ngModel)]="nuevaIniciativa.instanciaDeSalida" name="instanciaDeSalida" >
+          <option value="" disabled selected>Seleccione la instancia de salida</option>
+          <option value="MVP">MVP</option>
+          <option value="F&F">F&F</option>
+          <option value="Mar Abierto">Mar Abierto</option>
+
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="text-area">Descripción del Producto (Objetivo, Solución, Contexto, etc)
         <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
@@ -129,7 +147,7 @@
       </label>
       <div class="info-icon-container">
         <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-        <span class="custom-tooltip">Un canal contable es...</span>
+        <span class="custom-tooltip">Indique si su iniciativa necesitará de un canal contable </span>
       </div>
 
     </div>

@@ -77,18 +77,19 @@
         </div>
       </div>
 
-      <div class="form-group" *ngIf="!isVisible">
-        <label for="nombre">
-          Nombre
-          <div class="info-icon-container">
-            <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-            <span class="custom-tooltip">Persona Responsable de levantar el Riesgo</span>
-          </div>
-        </label>
-        <div class="input-container">
-          <input type="text" id="nombreRiesgo" name="nombre" value="Manuel Perez" readonly>
+
+     <div class="form-group">
+      <label for="nombre">Indique su Correo Eléctronico
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Indique su correo electrónico</span>
         </div>
+      </label>
+      <div class="input-container">
+        <input type="email" id="responsableRiesgo"  [(ngModel)]="responsableRiesgo" name="responsableRiesgo"  placeholder="Persona que carga el riesgo.">
       </div>
+    </div>
+
 
       <div class="form-group" *ngIf="!isVisible">
         <label for="tipo">
@@ -120,9 +121,9 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="isVisibleSinRiesgos">
         <label for="revisadoSinRiesgos">
-          <input type="checkbox" id="revisadoSinRiesgos"  name="revisadoSinRiesgos" (click)="toggleVisibility()">
+          <input type="checkbox" id="revisadoSinRiesgos"  name="revisadoSinRiesgos"  (click)="toggleVisibility()">
           Revisado sin riesgos a levantar
         </label>
       </div>

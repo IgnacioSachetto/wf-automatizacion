@@ -32,6 +32,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   enviarVisible: boolean = false;
   areaSeleccionada: string = '';
   tituloRiesgo: string = '';
+  responsableRiesgo: string = '';
   descripcionRiesgo: string = '';
   tipoSeleccionado: string = '';
   iniciativaSeleccionada: { summary: string; epicId: string, status: string } | null = null;
@@ -40,6 +41,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
   riesgosTemporales: {
     areaSeleccionada: string;
     titulo: string;
+    responsableRiesgo: string;
     descripcion: string;
     iniciativaSeleccionada: { summary: string; epicId: string, status: string } | null;
     tipo: string;
@@ -158,10 +160,13 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
   isVisible: boolean = false;
   isVisibleEnviar: boolean = false;
+  isVisibleSinRiesgos: boolean = true;
 
   toggleVisibility() {
     this.isVisible = !this.isVisible;
     this.isVisibleEnviar = !this.isVisibleEnviar;
+    this.isVisibleSinRiesgos = !this.isVisibleSinRiesgos;
+
   }
 
 
@@ -292,12 +297,19 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       const epic = this.iniciativasEnCurso.find(iniciativa => iniciativa.summary === riesgo.iniciativaSeleccionada?.summary);
 
       const epicId = epic ? epic.epicId : '';
-
-      this.jiraService.crearRiskEnJira(
+      console.log('Enviando riesgo a Jira:', {
+        tituloConPrefijo,
+        descripcion: riesgo.descripcion,
+        areaSeleccionada: riesgo.areaSeleccionada,
+        responsableRiesgo: riesgo.responsableRiesgo,
+        epicId: epicId
+      });
+            this.jiraService.crearRiskEnJira(
         tituloConPrefijo,
         riesgo.descripcion,
         '10038',
         riesgo.areaSeleccionada,
+        riesgo.responsableRiesgo,
         epicId
       ).subscribe(
         () => {
@@ -353,6 +365,11 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       return;
     }
 
+    if (!this.responsableRiesgo || this.responsableRiesgo.trim() === '') {
+      this.toastr.error('Debe ingresar un título para el riesgo.');
+      return;
+    }
+
     if (!this.descripcionRiesgo || this.descripcionRiesgo.trim() === '') {
       this.toastr.error('Debe ingresar una descripción para el riesgo.');
       return;
@@ -368,6 +385,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     this.riesgosTemporales.push({
       areaSeleccionada: areaParaRiesgo,
       titulo: this.tituloRiesgo,
+      responsableRiesgo: this.responsableRiesgo,
       descripcion: this.descripcionRiesgo,
       iniciativaSeleccionada: this.iniciativaSeleccionada,
       tipo: this.tipoSeleccionado,
@@ -376,6 +394,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
 
     this.areaSeleccionada = '';
     this.tituloRiesgo = '';
+    this.responsableRiesgo = '';
     this.descripcionRiesgo = '';
     this.tipoSeleccionado = '';
     this.iniciativaSeleccionada = null;
@@ -384,6 +403,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       this.tablaVisible = true;
     }
     this.isVisibleEnviar = true;
+    this.isVisibleSinRiesgos = false;
 
     this.toastr.success('Riesgo agregado correctamente!');
   }
@@ -411,6 +431,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
     if (this.riesgosTemporales.length === 0) {
       this.tablaVisible = false;
       this.isVisibleEnviar = false;
+      this.isVisibleSinRiesgos = true;
     }
   }
 
