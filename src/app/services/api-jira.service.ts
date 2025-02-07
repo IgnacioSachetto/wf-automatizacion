@@ -56,9 +56,12 @@ export class JiraService {
     );
   }
 
-  iniciativaSinRiesgosPorArea(areaSeleccionada: string, epicId?: string): Observable<any> {
+  iniciativaSinRiesgosPorArea(areaSeleccionada: string, responsableRiesgo : string, epicId?: string): Observable<any> {
+
+    console.log(responsableRiesgo);
     const payload = {
       areaSeleccionada: areaSeleccionada,
+      responsableRiesgo: responsableRiesgo,
       epicId: epicId
     };
 

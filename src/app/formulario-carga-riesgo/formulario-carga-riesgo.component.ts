@@ -270,7 +270,7 @@ export class FormularioCargaRiesgoComponent implements OnInit {
       return;
     }
 
-    this.jiraService.iniciativaSinRiesgosPorArea(this.areaSeleccionada, epicId).subscribe(
+    this.jiraService.iniciativaSinRiesgosPorArea(this.areaSeleccionada, this.responsableRiesgo, epicId).subscribe(
       () => {
         this.toastr.success("Sin riesgos levantado por el area", 'Éxito');
         setTimeout(() => {
