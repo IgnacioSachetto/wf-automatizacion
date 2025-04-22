@@ -1,0 +1,27 @@
+<div class="form-container">
+  <h2>Iniciativas en Curso</h2>
+  <div class="table-container" *ngIf="iniciativas.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Iniciativa</th>
+          <th>Fecha Estimada de Implementación</th>
+          <th>Referente</th>
+          <th>Link de Jira</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let iniciativas of iniciativas">
+          <td>{{ iniciativas.epicId }} - {{ iniciativas.summary }}</td>
+          <td>{{ iniciativas.duedate || 'No disponible' }}</td>
+          <td>{{ iniciativas.assignee || 'No asignado' }}</td>
+          <td><a [href]="iniciativas.url" target="_blank">Ver en Jira</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="iniciativas.length === 0" class="no-data-message">
+    No hay iniciativas en curso disponibles.
+  </div>
+</div>

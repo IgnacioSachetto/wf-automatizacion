@@ -1,12 +1,23 @@
+body, html {
+  overflow-x: hidden;
+}
+
 .form-container {
   flex: 1;
   padding: 1rem;
-  max-width: 1000px;
-  width: 60%;
-  margin: 1px auto;
+  max-width: 80vw;
+  width: 80vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin-top: 3%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group {
@@ -41,9 +52,42 @@
   color: #5a189a;
 }
 
-.btn-filled {
-  background: #5a189a;
+button[type="button"] {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  height: 50px;
+}
+
+.nav-btn-form.btn-filled {
+  background-color: #50007f;
   color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 14px;
+  font-weight: bold;
+}
+
+.nav-btn-form.btn-filled:hover {
+  background-color: #4a148c;
 }
 
 textarea {
@@ -150,4 +194,47 @@ button[type="button"]:hover .custom-tooltip {
 
 .form-group select {
   padding-right: 50px;
+}
+
+.info-icon-container {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  margin-left: 8px;
+  margin-top: 3px;
+}
+
+.info-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.info-icon:hover {
+  opacity: 1;
+}
+
+.custom-tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 105%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 10px;
+}
+
+.info-icon-container:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
 }

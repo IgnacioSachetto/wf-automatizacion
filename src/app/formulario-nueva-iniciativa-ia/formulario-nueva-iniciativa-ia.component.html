@@ -1,176 +1,182 @@
 <div class="form-container">
-  <h2>Formulario de Solicitud - Nuevas Iniciativas IA</h2>
-  <form>
-
-    <div class="form-group">
-      <label for="email">Referente de la Iniciativa</label>
-      <div class="input-container">
-        <input type="email" id="email" placeholder="Correo electrónico Referente" required>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Proporciona el correo electrónico del referente que lidera esta iniciativa.</span>
-        </button>
-      </div>
+  <h2>Formulario de Solicitud - Nuevas Iniciativas</h2>
+  <form (ngSubmit)="enviarFormularioIA($event)">  <!-- Referente -->
+  <div class="form-group">
+    <label for="email">Referente de la Iniciativa</label>
+    <div class="input-container">
+      <input type="email" id="email" name="email" [(ngModel)]="nuevaIniciativaIA.email" placeholder="Correo electrónico del referente" required>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Correo electrónico del referente que lidera la iniciativa.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="tituloIniciativa">Título de la Iniciativa</label>
-      <div class="input-container">
-        <input type="text" id="tituloIniciativa" placeholder="Ingresa el título de la iniciativa" name="tituloIniciativa" required>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Escribe un título breve que resuma la iniciativa.</span>
-        </button>
-      </div>
+  <!-- Título -->
+  <div class="form-group">
+    <label for="tituloIniciativa">Título de la Iniciativa</label>
+    <div class="input-container">
+      <input type="text" id="tituloIniciativa" name="tituloIniciativa" [(ngModel)]="nuevaIniciativaIA.tituloIniciativa" placeholder="Ej: Sistema IA para análisis de riesgos" required>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Título representativo de la iniciativa.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="documentacionProyecto">Documentación del Proyecto</label>
-      <div class="input-container">
-        <textarea id="documentacionProyecto" rows="4" placeholder="Descripción del Producto o enlace a la documentación..."
-          name="descripcionProducto"></textarea>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Incluye detalles como propósito, objetivos y enlaces relevantes (e.g., Confluence).</span>
-        </button>
-      </div>
+  <!-- Documentación -->
+  <div class="form-group">
+    <label for="documentacionProyecto">Documentación del Proyecto/Iniciativa</label>
+    <div class="input-container">
+      <textarea id="documentacionProyecto" name="documentacionProyecto" rows="4" [(ngModel)]="nuevaIniciativaIA.documentacionProyecto" placeholder="Ej: Descripción, objetivos, enlaces a Confluence, etc."></textarea>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Agregá información detallada y enlaces útiles del proyecto.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="fechaImplementacion">Fecha Estimada de Implementación</label>
-      <div class="input-container">
-        <input type="date" id="fechaImplementacion" class="form-control">
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Seleccione la fecha aproximada para la implementación de la iniciativa.</span>
-        </button>
-      </div>
+  <!-- Fecha de Implementación -->
+  <div class="form-group">
+    <label for="fechaImplementacion">Fecha Estimada de Implementación</label>
+    <div class="input-container">
+      <input type="date" id="fechaImplementacion" [(ngModel)]="nuevaIniciativaIA.fechaImplementacion" name="fechaImplementacion" class="form-control">
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Fecha aproximada en la que se planea implementar la iniciativa.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="interesadosIniciativa">Principales Interesados o Partes Involucradas</label>
-      <div class="input-container">
-        <textarea id="interesadosIniciativa" rows="4" placeholder="Listado de áreas o partes interesadas..."
-          name="descripcionProducto"></textarea>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Indique las áreas o personas involucradas en la iniciativa.</span>
-        </button>
-      </div>
+  <!-- Interesados -->
+  <div class="form-group">
+    <label for="interesadosIniciativa">Principales Interesados o Partes Involucradas</label>
+    <div class="input-container">
+      <textarea id="interesadosIniciativa" name="interesadosIniciativa" rows="4" [(ngModel)]="nuevaIniciativaIA.interesadosIniciativa" placeholder="Ej: RRHH, Seguridad Informática, Tecnología..."></textarea>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Áreas o equipos involucrados en esta iniciativa.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="almacenamientoDatos">¿El modelo almacena datos críticos o de personas usuarias?</label>
-      <div class="select-container">
-        <select id="almacenamientoDatos" class="form-control">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Indique si el modelo almacenará información sensible.</span>
-        </button>
-      </div>
+  <!-- Almacena Datos Críticos -->
+  <div class="form-group">
+    <label for="almacenamientoDatos">¿El modelo almacena datos críticos o de personas usuarias?</label>
+    <div class="select-container">
+      <select id="almacenamientoDatos" name="almacenamientoDatos" [(ngModel)]="nuevaIniciativaIA.almacenamientoDatos">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Indique si se procesan datos personales o sensibles.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="tipoIniciativa">Tipo de Iniciativa</label>
-      <div class="select-container">
-        <select id="tipoIniciativa" class="form-control" (change)="onTipoIniciativaChange($event)">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="interno">Desarrollo Interno</option>
-          <option value="externo">Desarrollo Externo</option>
-          <option value="ambas">Ambas</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Indica el tipo de desarrollo de la iniciativa.</span>
-        </button>
-      </div>
+  <!-- Tipo de Iniciativa -->
+  <div class="form-group">
+    <label for="tipoIniciativa">Tipo de Iniciativa</label>
+    <div class="select-container">
+      <select id="tipoIniciativa" name="tipoIniciativa" [(ngModel)]="nuevaIniciativaIA.tipoIniciativa" (change)="onTipoIniciativaChange($event)">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="interno">Desarrollo Interno</option>
+        <option value="externo">Desarrollo Externo</option>
+        <option value="ambas">Ambas</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Tipo de desarrollo de la iniciativa.</span>
+      </button>
     </div>
+  </div>
 
-
-
-
-    <div class="form-group" *ngIf="mostrarPreguntaProveedor">
-      <label for="almacenamientoProteccion">Por favor indica cuales proveedores son requeridos para la prestación del servicio.</label>
-      <div class="input-container">
-        <textarea id="almacenamientoProteccion" rows="4" placeholder="Indique cómo se almacenan y protegen los datos por parte de los proveedores..."
-          name="almacenamientoProteccion"></textarea>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Indique los proveedores requeridos para la prestación del servicio.</span>
-        </button>
-      </div>
+  <!-- Proveedores -->
+  <div class="form-group" *ngIf="mostrarPreguntaProveedor">
+    <label for="proveedoresServicio">Proveedores requeridos para la prestación del servicio</label>
+    <div class="input-container">
+      <textarea id="proveedoresServicio" name="proveedoresServicio" rows="4" [(ngModel)]="nuevaIniciativaIA.proveedoresServicio" placeholder="Lista de proveedores involucrados..."></textarea>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Ej: AWS, Azure, proveedores externos, etc.</span>
+      </button>
     </div>
+  </div>
 
-
-    <div class="form-group" *ngIf="mostrarPreguntaProveedor">
-      <label for="almacenamientoDatos">¿Se tiene identificado cómo se almacenan y protegen los datos por parte de los proveedores?</label>
-      <div class="select-container">
-        <select id="almacenamientoDatos" class="form-control">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Indique si los proveedores tienen acceso a los datos y cómo se protegen.</span>
-        </button>
-      </div>
+  <div class="form-group" *ngIf="mostrarPreguntaProveedor">
+    <label for="proteccionDatosProveedor">¿Se tiene identificado cómo se almacenan y protegen los datos por parte de los proveedores?</label>
+    <div class="select-container">
+      <select id="proteccionDatosProveedor" name="proteccionDatosProveedor" [(ngModel)]="nuevaIniciativaIA.proteccionDatosProveedor">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Indique si está documentada la gestión de datos por proveedores.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="almacenamientoDatos">El modelo incluye un sistema de IA que emplea técnicas subliminales que trasciendan la conciencia de una persona para alterar de manera sustancial su comportamiento de un modo que provoque o sea probable que provoque perjuicios físicos o psicológicos a esa persona o a otra</label>
-      <div class="select-container">
-        <select id="almacenamientoDatos" class="form-control">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Responsa según corresponda.</span>
-        </button>
-      </div>
+  <!-- Riesgos Subliminales -->
+  <div class="form-group">
+    <label for="riesgoSubliminal">El modelo incluye un sistema de IA que emplea técnicas subliminales que trasciendan la conciencia de una persona para alterar de manera sustancial su comportamiento de un modo que provoque o sea probable que provoque perjuicios físicos o psicológicos a esa persona o a otra.
+    </label>
+    <br/>
+    <div class="select-container">
+      <select id="riesgoSubliminal" name="riesgoSubliminal" [(ngModel)]="nuevaIniciativaIA.riesgoSubliminal">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Evaluar si la IA tiene este tipo de impacto.</span>
+      </button>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="almacenamientoDatos">El modelo abarca un servicio o sistema de IA que  aproveche alguna de las vulnerabilidades de un grupo específico de personas debido a su edad o discapacidad física o mental para alterar de manera sustancial el comportamiento de una persona que pertenezca a dicho grupo de un modo que provoque o sea probable que provoque perjuicios físicos o psicológicos a esa persona o a otra.</label>
-      <div class="select-container">
-        <select id="almacenamientoDatos" class="form-control">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Responda según corresponda.</span>
-        </button>
-      </div>
+  <!-- Riesgos por vulnerabilidad -->
+  <div class="form-group">
+    <label for="riesgoVulnerabilidad">El modelo abarca un servicio o sistema de IA que  aproveche alguna de las vulnerabilidades de un grupo específico de personas debido a su edad o discapacidad física o mental para alterar de manera sustancial el comportamiento de una persona que pertenezca a dicho grupo de un modo que provoque o sea probable que provoque perjuicios físicos o psicológicos a esa persona o a otra.
+    </label>
+    <br/>
+    <div class="select-container">
+      <select id="riesgoVulnerabilidad" name="riesgoVulnerabilidad" [(ngModel)]="nuevaIniciativaIA.riesgoVulnerabilidad">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Evaluar si la IA afecta de manera injusta a estos grupos.</span>
+      </button>
     </div>
+  </div>
 
-
-    <div class="form-group">
-      <label for="almacenamientoProteccion">El modelo incorpora el uso de sistemas de identificación biométrica remota «en tiempo real» en espacios de acceso público, salvo y en la medida en que dicho uso sea estrictamente necesario para uno o varios de los siguientes objetivos siguientes:
-        i) La búsqueda selectiva de víctimas concretas de delitos, incluidos menores desaparecidos;
-        ii) La prevención de una amenaza específica, importante e inminente para la vida o seguridad de las personas, o de un atentado terrorista;
-        iii) La detección, localización, identificación o enjuiciamiento de una persona que haya cometido o se sospeche que haya cometido alguno de los delitos mencionados en el artículo 2, apartado 2, de la Decisión Marco 2002/584/JAI del Consejo 62, para los cuales la normativa en vigor en el Estado miembro implicado imponga una pena o una medida de seguridad privativas de libertad cuya duración máxima sea al menos de tres años, según determine el Derecho de dicho Estado miembro
-        </label>      <div class="select-container">
-        <select id="almacenamientoDatos" class="form-control">
-          <option value="" disabled selected>Seleccione una opción</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
-        <button type="button" class="info-btn">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Responda según corresponda.</span>
-        </button>
-      </div>
+  <!-- Identificación Biométrica Remota -->
+  <div class="form-group">
+    <label for="identificacionBiometrica">El modelo incorpora el uso de sistemas de identificación biométrica remota «en tiempo real» en espacios de acceso público, salvo y en la medida en que dicho uso sea estrictamente necesario para uno o varios de los siguientes objetivos siguientes:
+      i) La búsqueda selectiva de víctimas concretas de delitos, incluidos menores desaparecidos;
+      ii) La prevención de una amenaza específica, importante e inminente para la vida o seguridad de las personas, o de un atentado terrorista;
+      iii) La detección, localización, identificación o enjuiciamiento de una persona que haya cometido o se sospeche que haya cometido alguno de los delitos mencionados en el artículo 2, apartado 2, de la Decisión Marco 2002/584/JAI del Consejo 62, para los cuales la normativa en vigor en el Estado miembro implicado imponga una pena o una medida de seguridad privativas de libertad cuya duración máxima sea al menos de tres años, según determine el Derecho de dicho Estado miembro
+      </label>
+      <br/>
+    <div class="select-container">
+      <select id="identificacionBiometrica" name="identificacionBiometrica" [(ngModel)]="nuevaIniciativaIA.identificacionBiometrica">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Evaluar si se cumple con los requisitos legales y éticos.</span>
+      </button>
     </div>
+  </div>
 
-    <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
-
-  </form>
+  <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
+</form>
 </div>

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pantalla-intermedia-ia',
@@ -6,9 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./pantalla-intermedia-ia.component.css']
 })
 export class PantallaIntermediaIaComponent {
-  @Output() formOpened = new EventEmitter<string>();
+  constructor(private router: Router) {}
 
-  openForm(type: string) {
-    this.formOpened.emit(type);
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

@@ -7,10 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { EstadoRiesgosPorAreaComponent } from './estado-riesgos-por-area/estado-riesgos-por-area.component';
-import { FormularioCargaRiesgoIaComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
+import { FormularioCargaRiesgoIAComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
 import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
-import { FormularioNuevaIniciativaIaComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
+import { FormularioIAComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/formulario-nueva-iniciativa.component';
+import { IniciativasEnCursoIAComponent } from './iniciativas-en-curso-ia/iniciativas-en-curso-ia.component';
 import { IniciativasEnCursoComponent } from './iniciativas-en-curso/iniciativas-en-curso.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
@@ -20,10 +21,11 @@ const appRoutes: Routes = [
   { path: 'pantalla-intermedia-producto', component: PantallaIntermediaProductoComponent },
   { path: 'pantalla-intermedia-ia', component: PantallaIntermediaIaComponent },
   { path: 'formulario-carga-riesgos', component: FormularioCargaRiesgoComponent },
-  { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIaComponent },
+  { path: 'formulario-carga-riesgos-ia', component: FormularioCargaRiesgoIAComponent },
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
-  { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIaComponent },
+  { path: 'formulario-nueva-iniciativa-ia', component: FormularioIAComponent },
   { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent },
+  { path: 'iniciativas-en-curso-ia', component: IniciativasEnCursoIAComponent },
   { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent },
 
   { path: '*', redirectTo: '' }
@@ -38,10 +40,11 @@ const appRoutes: Routes = [
     FormularioIniciativaComponent,
     PantallaIntermediaIaComponent,
     FormularioCargaRiesgoComponent,
-    FormularioCargaRiesgoIaComponent,
-    FormularioNuevaIniciativaIaComponent,
+    FormularioCargaRiesgoIAComponent,
+    FormularioIAComponent,
     IniciativasEnCursoComponent,
-    EstadoRiesgosPorAreaComponent
+    EstadoRiesgosPorAreaComponent,
+    IniciativasEnCursoIAComponent
   ],
   imports: [
     BrowserModule,

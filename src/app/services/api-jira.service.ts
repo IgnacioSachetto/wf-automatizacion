@@ -24,6 +24,52 @@ export class JiraService {
     );
   }
 
+
+  crearEpicIAEnJira(formulario: any): Observable<any> {
+    const payload = {
+      formulario
+    };
+
+    return this.http.post(`${this.jiraApiUrl}/createEpicIA`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear Epic en Jira:', error);
+        throw error;
+      })
+    );
+  }
+
+  crearRiskEnJiraIA(
+    nombre: string,
+    descripcion: string,
+    issueTypeId: string,
+    areaSeleccionada: string,
+    responsableRiesgo: string,
+    epicId?: string,
+  ): Observable<any> {
+    const payload = {
+      summary: nombre,
+      description: descripcion,
+      issueTypeId: issueTypeId,
+      areaSeleccionada: areaSeleccionada,
+      responsableRiesgo: responsableRiesgo,
+      epicId: epicId
+    };
+
+    if (!nombre || !descripcion || !issueTypeId || !areaSeleccionada || !responsableRiesgo) {
+      console.error('Faltan campos obligatorios');
+      throw new Error('Todos los campos son obligatorios');
+    }
+
+    console.log("este " + JSON.stringify(payload));
+
+    return this.http.post(`${this.jiraApiUrl}/createRiskIA`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear Risk en Jira:', error);
+        throw error;
+      })
+    );}
+
+
   crearRiskEnJira(
     nombre: string,
     descripcion: string,
@@ -54,7 +100,10 @@ export class JiraService {
         throw error;
       })
     );
+
   }
+
+
 
   iniciativaSinRiesgosPorArea(areaSeleccionada: string, responsableRiesgo : string, epicId?: string): Observable<any> {
 
@@ -74,6 +123,23 @@ export class JiraService {
   }
 
   crearTareaEnJira(
+    areaSecundaria: string,
+    epicId?: string
+  ): Observable<any> {
+    const payload = {
+      areaSecundaria,
+      epicId
+    };
+
+    return this.http.post(`${this.jiraApiUrl}/createTask`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear tarea en Jira:', error);
+        throw error;
+      })
+    );
+  }
+
+  crearTareaIAEnJira(
     areaSecundaria: string,
     epicId?: string
   ): Observable<any> {
