@@ -1,13 +1,18 @@
 <div class="form-container">
-  <h2>Carga de Riesgos - Solo Referentes</h2>
-  <form (ngSubmit)="enviarFormulario($event)">
+  <h2>
+    <img src="assets/images/RiskLogo.png" alt="Logo" class="logo-titulo">
+    WF de Nuevos Productos - Carga de Riesgos
+  </h2>
+    <form (ngSubmit)="enviarFormulario($event)">
     <div *ngIf="mensajeAlerta" class="canal-message" [ngClass]="{'alert-success': tipoAlerta === 'success', 'alert-warning': tipoAlerta === 'warning'}">
       {{ mensajeAlerta }}
     </div>
 
     <div class="form-group">
-      <label for="iniciativa">Iniciativa en Curso</label>
+      <label for="iniciativa">Seleccione una iniciativa</label>
+
       <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa" (ngModelChange)="onIniciativaSeleccionada()">
+
         <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
           {{ iniciativa.epicId }} - {{ iniciativa.summary }} - ( {{iniciativa.status}} )
         </option>
@@ -131,7 +136,11 @@
     <button class="agregar-riesgos" type="button" (click)="agregarRiesgo()" *ngIf="!isVisible">Agregar Riesgo</button>
 
     <div class="table-container" *ngIf="riesgosTemporales.length > 0">
-      <label for="tabla">Resumen de Riesgos</label>
+      <h2 class = "table-title">
+        <img src="assets/images/riskToCharge.png" alt="Logo" class="logo-titulo">
+        Riesgos a Cargar
+      </h2>
+      <br/>
       <table class="table" name="tabla">
         <thead>
           <tr>
@@ -192,7 +201,6 @@
       </table>
     </div>
     <button type="submit" class="nav-btn-form btn-filled" *ngIf="isVisibleEnviar">Enviar Solicitud</button>
-    <button class="visualizar-riesgos" type="button" (click)="navigateTo('estado-riesgos-por-area')" *ngIf="!isVisible">Estado de Riesgos</button>
 
   </form>
 </div>

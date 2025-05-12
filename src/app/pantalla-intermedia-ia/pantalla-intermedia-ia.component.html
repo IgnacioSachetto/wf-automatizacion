@@ -2,11 +2,11 @@
   <h2>Selecciona una Opcion</h2>
   <button class="action-button" (click)="navigateTo('formulario-nueva-iniciativa-ia')">Nueva Iniciativa IA</button>
 
-  <button class="action-button">Iniciativa IA (Pre-Producción Internas)</button>
+  <button class="action-button" (click)="navigateTo('formulario-pre-produccion-ia')">Formulario de Pre-Producción</button>
 
-  <button class="action-button">Iniciativa IA (Pre-Producción Externas)</button>
+  <button class="action-button" (click)="navigateTo('iniciativas-en-curso-ia')"> Iniciativas en Curso IA </button>
 
-  <button class="action-button">Monitoreo</button>
+  <button class="action-button" (click)="navigateTo('estado-riesgos-por-area-ia')">Riesgos Pendientes por Área</button>
 
   <button class="action-button-carga" (click)="navigateTo('formulario-carga-riesgos-ia')">Cargar Riesgos IA</button>
 </div>

@@ -4,9 +4,11 @@
   align-items: center;
   width: 100%;
   padding: 1rem;
-  border-bottom: 2px solid #5a189a;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #ffffff 30%, #ffb458);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra 3D para profundidad */
 }
+
+
 
 .logo-container img {
   transition: transform 0.3s ease, cursor 0.3s ease;

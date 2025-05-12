@@ -6,15 +6,30 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
 }
 
-h2 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 24px;
+.section-header {
+  display: flex;
+  align-items: center;
+  background-color: #50007f;
+  color: white;
+  font-size: 1.5rem;
   font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  gap: 12px;
   margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-header img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .table-container {
@@ -241,4 +256,27 @@ input[type="checkbox"] {
 .table-container .table td a.jira-link:hover {
   background-color: #0056b3;
   transform: scale(1.05);
+}
+
+h2 {
+  background-color: #50007f;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e0e0e0;
+  text-align: left;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 70px;
+}
+
+.logo-titulo {
+  position: absolute;
+  left: -40px;
+  width: 80px;
+  height: 80px;
+  margin-left: 20px;
 }

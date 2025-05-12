@@ -1,12 +1,11 @@
 <div class="form-container">
-  <h2>Formulario de Solicitud - Nuevas Iniciativas</h2>
-  <form (ngSubmit)="enviarFormulario($event)">
+  <h2>
+    <img src="assets/images/RiskLogo.png" alt="Logo" class="logo-titulo">
+    WF de Nuevos Productos - Nueva Iniciativa
+  </h2>  <form (ngSubmit)="enviarFormulario($event)">
     <div class="form-group">
       <label for="nombre">Nombre del Producto
-        <div class="info-icon-container">
-          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-          <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
-        </div>
+
       </label>
       <div class="input-container">
         <input type="text" id="nombre" required [(ngModel)]="nuevaIniciativa.nombreProducto" name="nombreProducto">

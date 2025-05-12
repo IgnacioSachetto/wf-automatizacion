@@ -30,7 +30,7 @@ export class IniciativasEnCursoIAComponent implements OnInit {
   }
 
   cargarIniciativas() {
-    this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicInProgressWithData').subscribe(
+    this.http.get<{ message: string; data: Epic[] }>('http://localhost:3000/jira-api/getAllEpicInProgressWithDataIA').subscribe(
       (response) => {
         const epicas = response.data || [];
 

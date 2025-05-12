@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { JiraService } from './services/api-jira.service';
 
 @Component({
@@ -10,26 +10,33 @@ import { JiraService } from './services/api-jira.service';
 export class AppComponent {
   currentScreen: string = '';
   selectedForm: string = '';
+  showNavbar: boolean = false;
 
-  constructor(private router: Router, private jiraService: JiraService) {}
+  constructor(private router: Router, private jiraService: JiraService) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showNavbar = event.urlAfterRedirects === '/';
+      }
+    });
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 
   onFormSubmitted() {
-    this.selectedForm = 'pantalla-intermedia-producto';
-    this.currentScreen = 'pantalla-intermedia-producto';
+    this.navigateTo('pantalla-intermedia-producto');
+    this.setForm('pantalla-intermedia-producto');
+  }
 
-
-
-}
-
-onFormSubmitted2() {
-  this.selectedForm = 'pantalla-intermedia-ia';
-  this.currentScreen = 'pantalla-intermedia-ia';
-}
+  onFormSubmitted2() {
+    this.navigateTo('pantalla-intermedia-ia');
+    this.setForm('pantalla-intermedia-ia');
+  }
 
   onFormSelected(formType: string) {
     console.log('Formulario seleccionado:', formType);
-    this.selectedForm = formType;
-    this.currentScreen = formType;
+    this.setForm(formType);
   }
 
   onFormClosed() {
@@ -40,5 +47,15 @@ onFormSubmitted2() {
   onFormOpened(formType: string) {
     this.selectedForm = formType;
     this.currentScreen = '';
+  }
+
+  openExternalLink() {
+    window.open('https://www.powerbi.com', '_blank');
+  }
+
+
+  private setForm(formType: string) {
+    this.selectedForm = formType;
+    this.currentScreen = formType;
   }
 }

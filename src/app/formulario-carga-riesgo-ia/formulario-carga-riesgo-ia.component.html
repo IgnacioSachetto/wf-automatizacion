@@ -1,6 +1,8 @@
 <div class="form-container">
-  <h2>Carga de Riesgos - Solo Referentes</h2>
-  <form (ngSubmit)="enviarFormulario($event)">
+  <h2>
+    <img src="assets/images/ialogo.png" alt="Logo" class="logo-titulo">
+    WF de Inteligencia Artificial - Carga de Riesgos
+  </h2>  <form (ngSubmit)="enviarFormulario($event)">
 
 
     <div class="form-group">
@@ -21,12 +23,14 @@
         </div>
       </label>
       <div class="select-container">
-        <select id="area" name="area" class="form-control" [(ngModel)]="areaSeleccionada" (ngModelChange)="onAreaSeleccionada()">
+        <select id="area" name="area" class="form-control" [(ngModel)]="areaSeleccionada"
+          (ngModelChange)="onAreaSeleccionada()">
           <option value="" disabled selected>Seleccione una</option>
           <option value="Riesgo IT & OP">Riesgo IT & OP</option>
           <option value="Prevención de Fraudes">Prevención de Fraudes</option>
           <option value="Ciberseguridad">Ciberseguridad</option>
           <option value="Data">Data</option>
+          <option value="Legales & Compliance">Legales & Compliance</option>
 
         </select>
       </div>
@@ -35,21 +39,21 @@
 
 
 
-      <div class="form-group" *ngIf="!isVisible">
-        <label for="tituloRiesgo">
-          Título del Riesgo
-          <div class="info-icon-container">
-            <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-            <span class="custom-tooltip">Proporciona un título breve para el riesgo.</span>
-          </div>
-        </label>
-        <div class="input-container">
-          <input type="text" id="tituloRiesgo" [(ngModel)]="tituloRiesgo" name="tituloRiesgo" required >
+    <div class="form-group" *ngIf="!isVisible">
+      <label for="tituloRiesgo">
+        Título del Riesgo
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Proporciona un título breve para el riesgo.</span>
         </div>
+      </label>
+      <div class="input-container">
+        <input type="text" id="tituloRiesgo" [(ngModel)]="tituloRiesgo" name="tituloRiesgo" required>
       </div>
+    </div>
 
 
-     <div class="form-group">
+    <div class="form-group">
       <label for="nombre">Indique su Correo Eléctronico
         <div class="info-icon-container">
           <img class="info-icon" src="./assets/images/info.png" alt="Información" />
@@ -57,52 +61,57 @@
         </div>
       </label>
       <div class="input-container">
-        <input type="email" id="responsableRiesgo"  [(ngModel)]="responsableRiesgo" name="responsableRiesgo"  placeholder="Persona que carga el riesgo.">
+        <input type="email" id="responsableRiesgo" [(ngModel)]="responsableRiesgo" name="responsableRiesgo"
+          placeholder="Persona que carga el riesgo.">
       </div>
     </div>
 
 
-      <div class="form-group" *ngIf="!isVisible">
-        <label for="tipo">
-          Tipo
-          <div class="info-icon-container">
-            <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-            <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
-          </div>
-        </label>
-        <div class="select-container" *ngIf="!isVisible">
-          <select id="tipo" class="form-control" name="tipo" [(ngModel)]="tipoSeleccionado" required >
-            <option value="" disabled selected>Seleccionar una</option>
-            <option value="riesgo">Riesgo</option>
-            <option value="recomendacion">Recomendación</option>
-          </select>
+    <div class="form-group" *ngIf="!isVisible">
+      <label for="tipo">
+        Tipo
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Selecciona si es un riesgo o recomendación.</span>
         </div>
+      </label>
+      <div class="select-container" *ngIf="!isVisible">
+        <select id="tipo" class="form-control" name="tipo" [(ngModel)]="tipoSeleccionado" required>
+          <option value="" disabled selected>Seleccionar una</option>
+          <option value="riesgo">Riesgo</option>
+          <option value="recomendacion">Recomendación</option>
+        </select>
       </div>
+    </div>
 
-      <div class="form-group" *ngIf="!isVisible">
-        <label for="riesgo">
-          Descripción del Riesgo
-          <div class="info-icon-container">
-            <img class="info-icon" src="./assets/images/info.png" alt="Información" />
-            <span class="custom-tooltip">Describe el riesgo o proporciona enlaces relevantes.</span>
-          </div>
-        </label>
-        <div class="input-container">
-          <textarea id="riesgo" rows="6" [(ngModel)]="descripcionRiesgo" name="descripcionRiesgo" required ></textarea>
+    <div class="form-group" *ngIf="!isVisible">
+      <label for="riesgo">
+        Descripción del Riesgo
+        <div class="info-icon-container">
+          <img class="info-icon" src="./assets/images/info.png" alt="Información" />
+          <span class="custom-tooltip">Describe el riesgo o proporciona enlaces relevantes.</span>
         </div>
+      </label>
+      <div class="input-container">
+        <textarea id="riesgo" rows="6" [(ngModel)]="descripcionRiesgo" name="descripcionRiesgo" required></textarea>
       </div>
+    </div>
 
-      <div class="form-group" *ngIf="isVisibleSinRiesgos">
-        <label for="revisadoSinRiesgos">
-          <input type="checkbox" id="revisadoSinRiesgos"  name="revisadoSinRiesgos"  (click)="toggleVisibility()">
-          Revisado sin riesgos a levantar
-        </label>
-      </div>
+    <div class="form-group" *ngIf="isVisibleSinRiesgos">
+      <label for="revisadoSinRiesgos">
+        <input type="checkbox" id="revisadoSinRiesgos" name="revisadoSinRiesgos" (click)="toggleVisibility()">
+        Revisado sin riesgos a levantar
+      </label>
+    </div>
 
     <button class="agregar-riesgos" type="button" (click)="agregarRiesgo()" *ngIf="!isVisible">Agregar Riesgo</button>
 
     <div class="table-container" *ngIf="riesgosTemporales.length > 0">
-      <label for="tabla">Resumen de Riesgos</label>
+      <h2 class="table-title">
+        <img src="assets/images/riskToCharge.png" alt="Logo" class="logo-titulo">
+        Riesgos a Cargar
+      </h2>
+      <br />
       <table class="table" name="tabla">
         <thead>
           <tr>
@@ -119,11 +128,13 @@
             <td>
 
               <div *ngIf="!riesgo.editando">
-                {{ areaSecundariaSeleccionada && areaSecundariaSeleccionada !== 'area-secundaria' ? areaSecundariaSeleccionada : (areaOtro || riesgo.areaSeleccionada) }}
+                {{ areaSecundariaSeleccionada && areaSecundariaSeleccionada !== 'area-secundaria' ?
+                areaSecundariaSeleccionada : (areaOtro || riesgo.areaSeleccionada) }}
               </div>
 
 
-              <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.areaSeleccionada" class="input-sin-borde" name="areaSeleccionada{{i}}" />
+              <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.areaSeleccionada" class="input-sin-borde"
+                name="areaSeleccionada{{i}}" />
             </td>
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.titulo }}</div>
@@ -132,7 +143,7 @@
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.tipo }}</div>
               <div *ngIf="riesgo.editando">
-                <select [(ngModel)]="riesgo.tipo" class="input-sin-borde" name="tipo{{i}}" >
+                <select [(ngModel)]="riesgo.tipo" class="input-sin-borde" name="tipo{{i}}">
                   <option value="riesgo">Riesgo</option>
                   <option value="recomendacion">Recomendación</option>
                 </select>
@@ -140,12 +151,13 @@
             </td>
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.descripcion }}</div>
-              <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.descripcion" class="input-sin-borde" name="descripcion{{i}}" />
+              <input *ngIf="riesgo.editando" [(ngModel)]="riesgo.descripcion" class="input-sin-borde"
+                name="descripcion{{i}}" />
             </td>
             <td>
               <div *ngIf="!riesgo.editando">{{ riesgo.iniciativaSeleccionada?.summary }}</div>
               <div *ngIf="riesgo.editando">
-                <select [(ngModel)]="riesgo.iniciativaSeleccionada" class="input-sin-borde" name="iniciativa{{i}}" >
+                <select [(ngModel)]="riesgo.iniciativaSeleccionada" class="input-sin-borde" name="iniciativa{{i}}">
                   <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
                     {{ iniciativa.summary }}
                   </option>
@@ -163,7 +175,7 @@
       </table>
     </div>
     <button type="submit" class="nav-btn-form btn-filled" *ngIf="isVisibleEnviar">Enviar Solicitud</button>
-    <button class="visualizar-riesgos" type="button" (click)="navigateTo('estado-riesgos-por-area')" *ngIf="!isVisible">Estado de Riesgos</button>
+
 
   </form>
 </div>

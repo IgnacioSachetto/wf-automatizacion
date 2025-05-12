@@ -8,9 +8,8 @@ import { JiraService } from '../services/api-jira.service';
   templateUrl: './formulario-nueva-iniciativa-ia.component.html',
   styleUrls: ['./formulario-nueva-iniciativa-ia.component.css']
 })
-export class FormularioIAComponent {
+export class FormularioNuevaIniciativaIAComponent {
   @Output() formSubmitted = new EventEmitter<void>();
-
 
   nuevaIniciativaIA = {
     email: '',
@@ -19,8 +18,12 @@ export class FormularioIAComponent {
     fechaImplementacion: '',
     interesadosIniciativa: '',
     almacenamientoDatos: '',
+    detalleDatosCriticos: '',
     tipoIniciativa: '',
+    tipoUsuarios: '',
     proveedoresServicio: '',
+    ddjjProveedor: '',
+    proveedoresAdicionales: '',
     proteccionDatosProveedor: '',
     riesgoSubliminal: '',
     riesgoVulnerabilidad: '',
@@ -28,8 +31,8 @@ export class FormularioIAComponent {
   };
 
   cargandoToast: any;
-
   mostrarPreguntaProveedor = false;
+  mostrarDetalleDatosCriticos = false; // <-- esta es la propiedad que faltaba
 
   constructor(
     private toastr: ToastrService,
@@ -38,14 +41,16 @@ export class FormularioIAComponent {
     private router: Router
   ) {}
 
-  onTipoIniciativaChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const tipoIniciativa = selectElement.value;
+  verificarDatosCriticos() {
+    this.mostrarDetalleDatosCriticos = this.nuevaIniciativaIA.almacenamientoDatos === 'si';
+  }
 
-    if (tipoIniciativa === 'externo' || tipoIniciativa === 'ambas') {
-      this.mostrarPreguntaProveedor = true;
-    } else {
-      this.mostrarPreguntaProveedor = false;
+  verificarTipoIniciativa() {
+    this.mostrarPreguntaProveedor = this.nuevaIniciativaIA.tipoIniciativa === 'Externo';
+
+    if (!this.mostrarPreguntaProveedor) {
+      this.nuevaIniciativaIA.proveedoresServicio = '';
+      this.nuevaIniciativaIA.ddjjProveedor = '';
     }
   }
 
@@ -93,10 +98,7 @@ export class FormularioIAComponent {
       valido = false;
     }
 
-    if (this.mostrarPreguntaProveedor && this.nuevaIniciativaIA.proteccionDatosProveedor === '') {
-      mensajes.push('Es necesario indicar si los proveedores protegen los datos.');
-      valido = false;
-    }
+
 
     if (this.nuevaIniciativaIA.riesgoSubliminal === '') {
       mensajes.push('Es necesario indicar si el modelo incluye riesgos subliminales.');
@@ -135,9 +137,6 @@ export class FormularioIAComponent {
       extendedTimeOut: 0
     });
 
-
-
-
     this.jiraService.crearEpicIAEnJira(this.nuevaIniciativaIA).subscribe(
       (response) => {
         this.toastr.clear();
@@ -153,5 +152,4 @@ export class FormularioIAComponent {
       }
     );
   }
-
 }

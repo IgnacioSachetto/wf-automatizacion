@@ -1,0 +1,156 @@
+<div class="form-container">
+
+  <h2>
+    <img src="assets/images/ialogo.png" alt="Logo" class="logo-titulo">
+    WF de Inteligencia Artificial - Etapa de Pre-Producción
+  </h2>
+
+  <form (ngSubmit)="enviarFormularioPreProduccionIA($event)">  <!-- Referente -->
+
+    <div class="card-header-50">
+      <strong>Datos de la iniciativa</strong>
+    </div>
+
+<div class="form-group">
+  <div class="form-group">
+    <label for="iniciativa">Seleccione su iniciativa</label>
+    <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa">
+      <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
+        {{ iniciativa.epicId }} - {{ iniciativa.summary }} - ( {{iniciativa.status}} )
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="iniciativaSeleccionada" class="card mt-3">
+    <div class="card-header">
+      <strong>Descripción de la Iniciativa</strong>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let linea of procesarDescripcion(iniciativaSeleccionada.description)">
+        <p>{{ linea }}</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Referente de la Iniciativa
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Correo electrónico del referente que lidera la iniciativa, responsable de coordinarla y supervisarla.</span>
+      </button>
+    </label>
+    <div class="input-container">
+      <input type="email" id="email" name="email" [(ngModel)]="nuevaIniciativaIA.email" placeholder="Correo electrónico del referente" required>
+    </div>
+  </div>
+
+
+
+
+  <br/>
+
+  <div class="card-header-50">
+    <strong>Protección de Datos</strong>
+  </div>
+  <div class="form-group">
+    <label>¿El modelo o la aplicación cuenta con certificaciones y/o mecanismos que aseguren la protección de datos personales y el cumplimiento de las normativas pertinentes?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.certificaciones" name="certificaciones">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>¿Se han implementado medidas de seguridad (cifrado, control de accesos y anonimización,etc) para proteger los datos sensibles o personales?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.medidasSeguridad" name="medidasSeguridad">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="card-header-50">
+    <strong>Resiliencia Operativa y Gestión de Fallos</strong>
+  </div>
+  <div class="form-group">
+    <label>¿Existen procedimientos definidos para garantizar la continuidad del negocio en caso de interrupciones significativas del servicio?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.continuidadNegocio" name="continuidadNegocio">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>En caso de que el modelo/iniciativa falle, ¿impactará en alguno de los siguientes procesos críticos?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.impactoCritico" name="impactoCritico">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+
+  <div class="card-header-50">
+    <strong>Monitoreo y Actualización</strong>
+  </div>
+
+  <div class="form-group">
+    <label>¿El modelo cuenta con un sistema de monitoreo en tiempo real para identificar posibles anomalías, errores o brechas de seguridad?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.monitoreoTiempoReal" name="monitoreoTiempoReal">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>¿Existen procedimientos definidos para la actualización y mantenimiento del modelo?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.actualizacionModelo" name="actualizacionModelo">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+
+  <div class="card-header-50">
+    <strong>Control de Acceso y Gestión de Cambios</strong>
+  </div>
+  <div class="form-group">
+    <label>¿Se ha implementado un procedimiento para asegurar que solo las personas autorizadas puedan acceder a datos sensibles y funcionalidades críticas?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.accesoAutorizado" name="accesoAutorizado">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>¿Existen procesos establecidos para gestionar los cambios en producción, asegurando revisiones de seguridad y calidad, con alertas o notificaciones sobre los cambios implementados?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.gestionCambios" name="gestionCambios">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+
+  <div class="card-header-50">
+    <strong>Monitoreo Post-producción</strong>
+  </div>
+  <div class="form-group">
+    <label>¿Se realiza un monitoreo regular del desempeño y la disponibilidad del servicio de forma interna, incluyendo métricas como precisión del modelo, latencia y otras métricas operativas?</label>
+    <select [(ngModel)]="nuevaIniciativaIA.monitoreoInterno" name="monitoreoInterno">
+      <option value="">Seleccione</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+  </div>
+</div>
+
+  <button type="submit" class="nav-btn-form btn-filled">Enviar Solicitud</button>
+</form>
+
+</div>

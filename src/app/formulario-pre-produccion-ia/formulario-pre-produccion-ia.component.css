@@ -11,8 +11,8 @@ body, html {
   flex-direction: column;
   justify-content: flex-start;
   padding: 2rem;
-  max-width: 80vw;
-  width: 80vw;
+  max-width: 90vw;
+  width: 90vw;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -113,27 +113,31 @@ button[type="button"] {
 }
 
 .custom-tooltip {
-  visibility: hidden;
-  width: 200px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 8px;
   position: absolute;
-  z-index: 1;
   top: 50%;
-  left: 105%;
+  left: 120%; /* Ajusta esto para mover el tooltip más a la derecha */
   transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 10; /* Para asegurarse de que se muestre sobre otros elementos */
   opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 10px;
+  visibility: hidden;
+  transition: opacity 0.2s;
+}
+.info-btn:hover .custom-tooltip {
+  visibility: visible; /* Mostrar al hacer hover */
+  opacity: 1;
+  z-index: 99;
 }
 
-.info-icon-container:hover .custom-tooltip {
-  visibility: visible;
-  opacity: 1;
+.info-btn {
+  position: relative; /* Necesario para posicionar el tooltip correctamente */
 }
+
 
 button[type="submit"] {
   display: block;
@@ -213,4 +217,106 @@ h2 {
   width: 80px;
   height: 80px;
   margin-left: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  background-color: #dd5602;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.card-header-50 {
+  background-color: #50007f;
+  width:35vw;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+.card-body p:first-child {
+  margin-top: 0; /* Eliminar margen superior en el primer párrafo */
+}
+
+.card-body p strong {
+  font-weight: 600;
+  color: #50007f; /* Color del texto de los títulos */
+}
+
+.card-body p + p {
+  margin-top: 1.5rem; /* Separar los párrafos entre sí */
+}
+
+.card-body .linea-descripcion {
+  margin-bottom: 1rem;
+}
+
+.card-body .linea-descripcion:first-child {
+  margin-top: 0;
+}
+
+.card-body .linea-descripcion:last-child {
+  margin-bottom: 0;
+}
+
+.card-body p {
+  font-family: 'Arial', sans-serif;
+}
+
+.card-body p strong {
+  color: #5a189a; /* Color del texto de los títulos */
+}
+
+.card-body .description-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card-body .description-item p {
+  margin: 0;
+}
+
+.card-body .description-item .description-label {
+  font-weight: bold;
+  color: #50007f;
+}
+
+.card-body .description-item .description-value {
+  font-style: italic;
+  color: #666;
+}
+
+.card-body .line-break {
+  height: 2px;
+  background-color: #ddd;
+  margin: 10px 0;
 }
