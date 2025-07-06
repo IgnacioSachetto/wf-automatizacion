@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JiraService } from '../services/api-jira.service';
-
 interface Epic {
   epicId: string;
   summary: string;
@@ -68,6 +67,8 @@ export class FormularioPreProduccionIaComponent {
     continuidadExterno: '',
     impactoExterno: ''
   };
+
+
 
   cargandoToast: any;
   mostrarPreguntaProveedor = false;

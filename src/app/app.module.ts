@@ -10,6 +10,7 @@ import { EstadoRiesgosPorAreaIaComponent } from './estado-riesgos-por-area-ia/es
 import { EstadoRiesgosPorAreaComponent } from './estado-riesgos-por-area/estado-riesgos-por-area.component';
 import { FormularioCargaRiesgoIAComponent } from './formulario-carga-riesgo-ia/formulario-carga-riesgo-ia.component';
 import { FormularioCargaRiesgoComponent } from './formulario-carga-riesgo/formulario-carga-riesgo.component';
+import { FormularioMonitoreoIaComponent } from './formulario-monitoreo-ia/formulario-monitoreo-ia.component';
 import { FormularioNuevaIniciativaIAComponent } from './formulario-nueva-iniciativa-ia/formulario-nueva-iniciativa-ia.component';
 import { FormularioIniciativaComponent } from './formulario-nueva-iniciativa/formulario-nueva-iniciativa.component';
 import { FormularioPreProduccionIaComponent } from './formulario-pre-produccion-ia/formulario-pre-produccion-ia.component';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'formulario-nueva-iniciativa', component: FormularioIniciativaComponent },
   { path: 'formulario-nueva-iniciativa-ia', component: FormularioNuevaIniciativaIAComponent },
   { path: 'formulario-pre-produccion-ia', component: FormularioPreProduccionIaComponent },
+  { path: 'formulario-monitoreo-ia', component: FormularioMonitoreoIaComponent },
   { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent },
   { path: 'iniciativas-en-curso-ia', component: IniciativasEnCursoIAComponent },
   { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     EstadoRiesgosPorAreaComponent,
     IniciativasEnCursoIAComponent,
     EstadoRiesgosPorAreaIaComponent,
-    FormularioPreProduccionIaComponent
+    FormularioPreProduccionIaComponent,
+    FormularioMonitoreoIaComponent
   ],
   imports: [
     BrowserModule,

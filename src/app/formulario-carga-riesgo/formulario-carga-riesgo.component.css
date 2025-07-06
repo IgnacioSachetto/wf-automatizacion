@@ -398,3 +398,21 @@ h2 {
   padding-left: 70px;
   width:50vw;
 }
+
+.alerta-aviso {
+  background-color: #fef8e7;
+  border-left: 5px solid #ee6c02;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  border-radius: 4px;
+}
+
+.alerta-aviso a {
+  color: #ee6c02;
+  text-decoration: underline;
+  font-weight: 600;
+}

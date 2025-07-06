@@ -76,11 +76,12 @@
 
 .icon-button span {
   font-size: 12px;
-  font-family: Arial, sans-serif;
 }
 
 .btn span {
   font-size: 12px; /* Ajustar el tamaño del texto */
+  font-family: Arial, sans-serif;
+
 }
 
 /* Estilos para los botones habilitados */

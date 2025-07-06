@@ -13,4 +13,8 @@ export class PantallaIntermediaProductoComponent {
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
+
+  goToTableroLooker(){
+      window.open('https://www.google.com', '_blank'); 
+  }
 }

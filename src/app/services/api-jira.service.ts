@@ -51,6 +51,19 @@ export class JiraService {
     );
   }
 
+  crearEpicMonitoreoEnJira(formulario: any): Observable<any> {
+    const payload = {
+      formulario
+    };
+    console.log("llege")
+    return this.http.post(`${this.jiraApiUrl}/createJiraEpicMonitoreoIA`, payload).pipe(
+      catchError((error) => {
+        console.error('Error al crear Epic en Jira:', error);
+        throw error;
+      })
+    );
+  }
+
   crearRiskEnJiraIA(
     nombre: string,
     descripcion: string,

@@ -1,0 +1,355 @@
+<div class="form-container">
+  <h2>
+    <img src="assets/images/ialogo.png" alt="Logo" class="logo-titulo">
+    WF de Inteligencia Artificial - Etapas de Monitoreo
+  </h2>
+
+  <form (ngSubmit)="enviarFormularioMonitoreoIA($event)">
+
+      <div class="form-group">
+        <label for="iniciativa">Seleccione su iniciativa</label>
+        <select id="iniciativa" class="form-control" [(ngModel)]="iniciativaSeleccionada" name="iniciativa">
+          <option *ngFor="let iniciativa of iniciativasEnCurso" [ngValue]="iniciativa">
+            {{ iniciativa.epicId }} - {{ iniciativa.summary }} - ( {{iniciativa.status}} )
+          </option>
+        </select>
+      </div>
+
+
+
+  <div *ngIf="iniciativaSeleccionada" class="card mt-3">
+    <div class="card-header">
+      <strong>Descripción de la Iniciativa</strong>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let linea of procesarDescripcion(iniciativaSeleccionada.description)">
+        <p>{{ linea }}</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Referente de la Iniciativa
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">Correo electrónico del referente que lidera la iniciativa, responsable de coordinarla y supervisarla.</span>
+      </button>
+    </label>
+    <div class="input-container">
+      <input type="email" id="email" name="email" [(ngModel)]="datosIA.email" placeholder="Correo electrónico del referente" required>
+    </div>
+  </div>
+
+    <!-- Etapa 1: Diseño -->
+    <div class="card-header-50"><strong>Etapa 1: Diseño</strong></div>
+
+    <div class="form-group">
+      <label>
+        Indique los roles y responsabilidades involucrados en el ciclo de vida de esta solución de IA.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Especifique qué persona o equipo asume cada responsabilidad en el desarrollo de la solución.
+          </span>
+        </button>
+      </label>
+      <textarea
+      [(ngModel)]="datosIA.roles"
+      name="roles"
+      placeholder="Ej: Detalle de cada responsable, su función, y vínculo con la iniciativa o adjunte link a la documentación"
+      rows="4"
+      required>
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label>
+      ¿La iniciativa fue presentada y formalizada ante el Comité de IA?
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">
+          Confirmación de que la iniciativa fue presentada formalmente en Comité de IA.
+        </span>
+      </button>
+    </label>
+    <select [(ngModel)]="datosIA.comiteIA" name="comiteIA" class="form-control" required>
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>
+      ¿Se realizó una evaluación legal y ética sobre la solución?
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">
+          Indicar si hubo revisión legal y ética interna o de terceros.
+        </span>
+      </button>
+    </label>
+    <select [(ngModel)]="datosIA.evalLegalEtica" name="evalLegalEtica" class="form-control" required>
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Proporcione un enlace o descripción de la ficha técnica del modelo o solución.
+      <button type="button" class="info-btn">
+        <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+        <span class="custom-tooltip">
+          La ficha técnica debe incluir una descripción del algoritmo, los datos utilizados, los objetivos y el enfoque general de la solución. Link a Drive/Confluence.
+        </span>
+      </button>
+    </label>
+    <textarea
+      [(ngModel)]="datosIA.fichaTecnica"
+      name="fichaTecnica"
+      rows="3"
+      placeholder="Link o descripción de la ficha técnica">
+    </textarea>
+  </div>
+
+
+    <!-- Etapa 2: Validación -->
+    <div class="card-header-50"><strong>Etapa 2: Validación</strong></div>
+
+    <div class="form-group">
+      <label>
+        Adjunte el informe de validación técnica que demuestre el correcto funcionamiento de la solución.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">
+            Debe mostrar evidencia de pruebas técnicas, validaciones funcionales o ensayos realizados. Link a Drive/Confluence.
+          </span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.validacionTecnica"
+        name="validacionTecnica"
+        rows="3"
+        placeholder="Link o descripción del informe técnico">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Adjunte la tabla de variables sensibles evaluadas junto con sus observaciones éticas o de sesgos.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Tabla con variables sensibles y observaciones sobre sesgos o ética. Link a Drive/Confluence</span>
+        </button>
+      </label>
+      <input type="url" [(ngModel)]="datosIA.variablesSensibles" name="variablesSensibles" placeholder="Link al documento" />
+    </div>
+
+    <div class="form-group">
+      <label>
+        Describa cómo se tratan los datos personales o sensibles dentro de la solución para asegurar la privacidad.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">
+            Explique brevemente si los datos se anonimizan, se cifran, quién tiene acceso, y cómo se garantiza la privacidad.
+          </span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.tratamientoDatos"
+        name="tratamientoDatos"
+        placeholder="Ej: Los datos personales se almacenan cifrados y se anonimiza la información sensible antes del procesamiento."
+        rows="4"
+        required>
+      </textarea>
+    </div>
+
+
+    <!-- Etapa 3: Implementación -->
+    <div class="card-header-50"><strong>Etapa 3: Implementación</strong></div>
+
+    <div class="form-group">
+      <label>¿La solución está registrada en el catálogo o inventario centralizado de soluciones IA?
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Indique si fue registrada formalmente en el catálogo institucional de soluciones IA.</span>
+        </button>
+      </label>
+      <select [(ngModel)]="datosIA.catalogoIA" name="catalogoIA" class="form-control">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Adjunte o enlace al documento técnico funcional que describa entradas, salidas y lógica operativa del modelo.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Este documento explica cómo funciona el modelo técnicamente. Puede ser link a Drive, Confluence, etc.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.docTecnicoFuncional"
+        name="docTecnicoFuncional"
+        placeholder="Ej: Link al documento en Drive/Confluence o breve resumen de su contenido"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Comparta evidencia de controles de acceso, generación de logs y pruebas de seguridad (pentest).
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Incluya evidencias que respalden la seguridad de la solución: logs, reportes de pentest, etc.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.accesoPentest"
+        name="accesoPentest"
+        placeholder="Ej: Link a logs de acceso, reportes de pentest, capturas o checklist de seguridad"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        ¿Se realizó un check de validación previo a la puesta en producción?
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Confirmación de validación técnica antes de habilitar la solución en entornos reales.</span>
+        </button>
+      </label>
+      <select [(ngModel)]="datosIA.checkProduccion" name="checkProduccion" class="form-control">
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <!-- Etapa 4: Mantenimiento -->
+    <div class="card-header-50"><strong>Etapa 4: Mantenimiento</strong></div>
+
+    <div class="form-group">
+      <label>
+        Adjunte el plan de monitoreo con umbrales definidos (KPIs / KRIs).
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Incluya un documento o link con el detalle de indicadores clave y umbrales establecidos.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.planMonitoreo"
+        name="planMonitoreo"
+        placeholder="Ej: Indicadores clave, umbrales definidos, frecuencia de monitoreo"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Comparta el registro de uso de la solución en producción. Puede incluir logs de actividad, capturas de dashboards o registros de ejecución periódica.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Evidencias de que la solución se encuentra operativa y monitoreada.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.registroUso"
+        name="registroUso"
+        placeholder="Ej: Link o descripción de registros periódicos, logs o dashboards"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Incluya evidencia de incidentes gestionados relacionados con esta solución.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Tickets, reportes o planillas que documenten incidentes asociados a la solución.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.incidentes"
+        name="incidentes"
+        placeholder="Ej: Detalles de incidentes gestionados, links a reportes o tickets"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Comparta el documento que se utiliza para el versionado de la solución.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Link o archivo que refleje las versiones y actualizaciones de la solución.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.versionado"
+        name="versionado"
+        placeholder="Ej: Documento con control de versiones, historial de cambios o actualizaciones"
+        rows="3">
+      </textarea>
+    </div>
+
+    <!-- Etapa 5: Obsolescencia -->
+    <div class="card-header-50"><strong>Etapa 5: Obsolescencia</strong></div>
+
+    <div class="form-group">
+      <label>
+        Explique cuáles son los criterios definidos para declarar obsoleta esta solución.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Describa las condiciones que indican que la solución debe retirarse o reemplazarse.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.criteriosVigencia"
+        name="criteriosVigencia"
+        placeholder="Ej: Variables que indican que la solución ya no es vigente"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Indique si se realiza una revisión de vigencia periódica en base a los criterios definidos.
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Describa si hay controles programados que verifiquen la continuidad de la solución.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.registroRevision"
+        name="registroRevision"
+        placeholder="Ej: Periodicidad y responsables de revisar la vigencia de la solución"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Adjunte el Plan de Eliminación Segura del Modelo/Iniciativa
+        <button type="button" class="info-btn">
+          <img class="info-icon" src="./assets/images/info.png" alt="Ayuda" />
+          <span class="custom-tooltip">Plan aprobado para la eliminación definitiva y segura del modelo.</span>
+        </button>
+      </label>
+      <textarea
+        [(ngModel)]="datosIA.eliminacionSegura"
+        name="eliminacionSegura"
+        placeholder="Ej: Link o detalle del plan aprobado para la eliminación definitiva del modelo"
+        rows="3">
+      </textarea>
+    </div>
+
+    <br />
+    <button type="submit" class="nav-btn-form btn-filled">Enviar</button>
+  </form>
+</div>
