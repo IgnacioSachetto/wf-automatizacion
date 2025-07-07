@@ -34,13 +34,20 @@ export class IniciativasEnCursoComponent implements OnInit {
       (response) => {
         const epicas = response.data || [];
 
-        this.iniciativas = epicas.map(epic => ({
-          epicId: epic.epicId,
-          summary: epic.summary,
-          assignee: epic.assignee,
-          duedate: epic.duedate,
-          url: epic.url
-        }));
+        this.iniciativas = epicas
+          .map(epic => ({
+            epicId: epic.epicId,
+            summary: epic.summary,
+            assignee: epic.assignee,
+            duedate: epic.duedate,
+            url: epic.url
+          }))
+          .sort((a, b) => {
+            if (!a.duedate) return 1;
+            if (!b.duedate) return -1;
+            return new Date(a.duedate).getTime() - new Date(b.duedate).getTime();
+          });
+
       },
       (error) => {
         this.toastr.error('Hubo un error al cargar las iniciativas en curso');

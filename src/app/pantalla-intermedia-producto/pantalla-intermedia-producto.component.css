@@ -85,5 +85,6 @@
 }
 
 .corner-button:hover {
-  background-color: #ee6c02;
+  background: linear-gradient(80deg, #ee6c02 50%, #ee6c02 100%);
 }
+
