@@ -19,6 +19,7 @@ import { IniciativasEnCursoComponent } from './iniciativas-en-curso/iniciativas-
 import { NavbarComponent } from './navbar/navbar.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   { path: 'pantalla-intermedia-producto', component: PantallaIntermediaProductoComponent },
@@ -33,8 +34,9 @@ const appRoutes: Routes = [
   { path: 'iniciativas-en-curso-ia', component: IniciativasEnCursoIAComponent },
   { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent },
   { path: 'estado-riesgos-por-area-ia', component: EstadoRiesgosPorAreaIaComponent },
+  { path: 'home', component: HomeComponent },
 
-  { path: '*', redirectTo: '' }
+  { path: '', component: HomeComponent },
 ];
 
 
@@ -53,7 +55,8 @@ const appRoutes: Routes = [
     IniciativasEnCursoIAComponent,
     EstadoRiesgosPorAreaIaComponent,
     FormularioPreProduccionIaComponent,
-    FormularioMonitoreoIaComponent
+    FormularioMonitoreoIaComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  showNavbar = true;
+
+  constructor(private router: Router) {
+    // Suscribirse a cambios de navegación en el constructor
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showNavbar = event.urlAfterRedirects === '/';
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    // Podrías poner lógica de inicialización extra aquí si querés
+  }
+
+  openExternalLink() {
+    window.open('https://www.powerbi.com', '_blank');
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+}

@@ -9,6 +9,7 @@ import { FormularioPreProduccionIaComponent } from './formulario-pre-produccion-
 import { IniciativasEnCursoComponent } from './iniciativas-en-curso/iniciativas-en-curso.component';
 import { PantallaIntermediaIaComponent } from './pantalla-intermedia-ia/pantalla-intermedia-ia.component';
 import { PantallaIntermediaProductoComponent } from './pantalla-intermedia-producto/pantalla-intermedia-producto.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'formulario-monitoreo-ia', component: FormularioMonitoreoIaComponent},
   { path: 'iniciativas-en-curso', component: IniciativasEnCursoComponent},
   { path: 'estado-riesgos-por-area', component: EstadoRiesgosPorAreaComponent},
+  { path: 'home', component: HomeComponent},
 
   { path: '', redirectTo: '', pathMatch: 'full' },
 ];

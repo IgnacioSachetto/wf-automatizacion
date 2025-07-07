@@ -1,0 +1,50 @@
+
+<div class="app-container">
+  <div class="main-content">
+    <div class="button-container" *ngIf="showNavbar">
+      <div class="button-row">
+        <button class="btn enabled" (click)="navigateTo('/pantalla-intermedia-producto')">
+          <div class="icon">
+            <img src="assets/images/logo-app.png" alt="Logo 1" class="button-icon" />
+          </div>
+          <span>Workflow de Nuevos Productos</span>
+        </button>
+        <button class="btn enabled" (click)="navigateTo('/pantalla-intermedia-ia')">
+          <div class="icon">
+            <img src="assets/images/ialogo.png" alt="Logo 1" class="button-icon" />
+          </div>
+          <span>Workflow de IA</span>
+        </button>
+        <button class="btn enabled" (click)="openExternalLink()">
+          <div class="icon">
+            <img src="assets/images/riskTeamLogo.png" alt="Logo 3" class="button-icon" />
+          </div>
+          <span>SSOT Riesgos</span>
+        </button>
+
+      </div>
+      <div class="button-row">
+        <button class="btn enabled">
+          <div class="icon">
+            <img src="assets/images/dashboardLogo.png" alt="Logo 3" class="button-icon" />
+          </div>
+          <span>Tablero Status WF Nuevos Productos</span>
+        </button>
+        <button class="btn enabled">
+          <div class="icon">
+            <img src="assets/images/mapa.png" alt="Logo 3" class="button-icon" />
+          </div>
+          <span>Mapa de Procesos</span>
+        </button>
+                <button class="btn enabled">
+          <div class="icon">
+            <img src="assets/images/perdidas.png" alt="Logo 3" class="button-icon" />
+          </div>
+          <span>Pérdidas Operacionales</span>
+        </button>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
