@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   showNavbar = true;
 
   constructor(private router: Router) {
-    // Suscribirse a cambios de navegación en el constructor
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showNavbar = event.urlAfterRedirects === '/';
@@ -20,7 +19,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Podrías poner lógica de inicialización extra aquí si querés
   }
 
   openExternalLink() {

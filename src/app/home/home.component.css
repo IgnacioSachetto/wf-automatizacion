@@ -1,7 +1,6 @@
 
 
 
-/* Contenedor de los botones */
 .button-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +11,6 @@
 
 }
 
-/* Asegura que las filas de los botones tengan un diseño adecuado */
 .button-row {
   display: flex;
   gap: 20px;
@@ -20,7 +18,7 @@
 }
 
 .btn {
-  width: 120px; /* Hacer el botón cuadrado */
+  width: 120px; 
   height: 120px;
   display: flex;
   justify-content: center;
@@ -33,14 +31,13 @@
   transition: background-color 0.3s, opacity 0.3s, transform 0.3s ease;
   text-align: center;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera para darle un efecto 3D */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilos para el icono de los botones */
 .icon {
-  font-size: 30px; /* Tamaño del icono */
+  font-size: 30px; 
   margin-bottom: 10px;
-  color: #800080; /* Color violeta */
+  color: #800080; 
 }
 
 .icon-button {
@@ -58,20 +55,19 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera para efecto 3D */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .icon-button:hover {
   background-color: #4a148c;
-  transform: translateY(-5px); /* Se eleva ligeramente al hacer hover */
+  transform: translateY(-5px); 
 }
 
-/* Estilos para el icono dentro del botón */
 .button-icon {
   width: 55px;
   height: 55px;
   object-fit: contain;
-  margin-bottom: 10px; /* Espacio entre el logo y el texto */
+  margin-bottom: 10px; 
 }
 
 .icon-button span {
@@ -79,12 +75,11 @@
 }
 
 .btn span {
-  font-size: 12px; /* Ajustar el tamaño del texto */
+  font-size: 12px; 
   font-family: Arial, sans-serif;
 
 }
 
-/* Estilos para los botones habilitados */
 .enabled {
   background-color: #5a189a;
   color: white;
@@ -92,10 +87,9 @@
 
 .enabled:hover {
   background-color: #29054d;
-  transform: translateY(-5px); /* Se eleva ligeramente al hacer hover */
+  transform: translateY(-5px); 
 }
 
-/* Estilos para los botones deshabilitados */
 .disabled {
   background-color: #ccc;
   color: #666;
@@ -107,12 +101,11 @@
   background-color: #ccc;
 }
 
-/* Animación para el icono cuando el botón está habilitado y en hover */
 .enabled .button-icon {
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .enabled:hover .button-icon {
-  transform: translateY(-10px) scale(1.1); /* Se eleva y agranda un poco */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* Sombra para efecto flotante */
+  transform: translateY(-10px) scale(1.1); 
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); 
 }
